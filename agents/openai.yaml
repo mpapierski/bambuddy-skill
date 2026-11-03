@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bambuddy"
+  short_description: "Use Bambuddy APIs for files, slicing and printers"
+  default_prompt: "Use $bambuddy to inspect my printers and manage a requested print through Bambuddy."

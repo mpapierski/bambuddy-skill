@@ -1,0 +1,790 @@
+method	path	operation_id	tags	summary
+GET	/	serve_frontend__get		Serve Frontend
+DELETE	/api/v1/ams-history/{printer_id}	delete_old_history_api_v1_ams_history__printer_id__delete	ams-history	Delete Old History
+GET	/api/v1/ams-history/{printer_id}/{ams_id}	get_ams_history_api_v1_ams_history__printer_id___ams_id__get	ams-history	Get Ams History
+GET	/api/v1/announcements	list_announcements_api_v1_announcements_get	announcements	List Announcements
+POST	/api/v1/announcements/{public_id}/read	mark_announcement_read_api_v1_announcements__public_id__read_post	announcements	Mark Announcement Read
+GET	/api/v1/api-keys/	list_api_keys_api_v1_api_keys__get	api-keys	List Api Keys
+POST	/api/v1/api-keys/	create_api_key_api_v1_api_keys__post	api-keys	Create Api Key
+DELETE	/api/v1/api-keys/{key_id}	delete_api_key_api_v1_api_keys__key_id__delete	api-keys	Delete Api Key
+GET	/api/v1/api-keys/{key_id}	get_api_key_api_v1_api_keys__key_id__get	api-keys	Get Api Key
+PATCH	/api/v1/api-keys/{key_id}	update_api_key_api_v1_api_keys__key_id__patch	api-keys	Update Api Key
+GET	/api/v1/archives/	list_archives_api_v1_archives__get	archives	List Archives
+GET	/api/v1/archives/analysis/failures	analyze_failures_api_v1_archives_analysis_failures_get	archives	Analyze Failures
+POST	/api/v1/archives/backfill-hashes	backfill_content_hashes_api_v1_archives_backfill_hashes_post	archives	Backfill Content Hashes
+GET	/api/v1/archives/compare	compare_archives_api_v1_archives_compare_get	archives	Compare Archives
+GET	/api/v1/archives/confirm/{token}/{verdict}	confirm_outcome_page_api_v1_archives_confirm__token___verdict__get	archives	Confirm Outcome Page
+POST	/api/v1/archives/confirm/{token}/{verdict}	confirm_outcome_by_token_api_v1_archives_confirm__token___verdict__post	archives	Confirm Outcome By Token
+GET	/api/v1/archives/export	export_archives_api_v1_archives_export_get	archives	Export Archives
+GET	/api/v1/archives/no-3mf-warning	no_3mf_warning_api_v1_archives_no_3mf_warning_get	archives	No 3Mf Warning
+POST	/api/v1/archives/purge	execute_archive_purge_api_v1_archives_purge_post	archives-purge	Execute Archive Purge
+GET	/api/v1/archives/purge/preview	preview_archive_purge_api_v1_archives_purge_preview_get	archives-purge	Preview Archive Purge
+GET	/api/v1/archives/purge/settings	get_archive_purge_settings_api_v1_archives_purge_settings_get	archives-purge	Get Archive Purge Settings
+PUT	/api/v1/archives/purge/settings	update_archive_purge_settings_api_v1_archives_purge_settings_put	archives-purge	Update Archive Purge Settings
+POST	/api/v1/archives/recalculate-costs	recalculate_all_costs_api_v1_archives_recalculate_costs_post	archives	Recalculate All Costs
+POST	/api/v1/archives/rescan-all	rescan_all_archives_api_v1_archives_rescan_all_post	archives	Rescan All Archives
+GET	/api/v1/archives/search	search_archives_api_v1_archives_search_get	archives	Search Archives
+POST	/api/v1/archives/search/rebuild-index	rebuild_search_index_api_v1_archives_search_rebuild_index_post	archives	Rebuild Search Index
+GET	/api/v1/archives/slim	list_archives_slim_api_v1_archives_slim_get	archives	List Archives Slim
+GET	/api/v1/archives/stats	get_archive_stats_api_v1_archives_stats_get	archives	Get Archive Stats
+GET	/api/v1/archives/stats/export	export_stats_api_v1_archives_stats_export_get	archives	Export Stats
+GET	/api/v1/archives/tags	get_all_tags_api_v1_archives_tags_get	archives	Get All Tags
+DELETE	/api/v1/archives/tags/{tag_name}	delete_tag_api_v1_archives_tags__tag_name__delete	archives	Delete Tag
+PUT	/api/v1/archives/tags/{tag_name}	rename_tag_api_v1_archives_tags__tag_name__put	archives	Rename Tag
+POST	/api/v1/archives/upload	upload_archive_api_v1_archives_upload_post	archives	Upload Archive
+POST	/api/v1/archives/upload-bulk	upload_archives_bulk_api_v1_archives_upload_bulk_post	archives	Upload Archives Bulk
+POST	/api/v1/archives/upload-source	upload_source_3mf_by_name_api_v1_archives_upload_source_post	archives	Upload Source 3Mf By Name
+DELETE	/api/v1/archives/{archive_id}	delete_archive_api_v1_archives__archive_id__delete	archives	Delete Archive
+GET	/api/v1/archives/{archive_id}	get_archive_api_v1_archives__archive_id__get	archives	Get Archive
+PATCH	/api/v1/archives/{archive_id}	update_archive_api_v1_archives__archive_id__patch	archives	Update Archive
+GET	/api/v1/archives/{archive_id}/capabilities	get_archive_capabilities_api_v1_archives__archive_id__capabilities_get	archives	Get Archive Capabilities
+GET	/api/v1/archives/{archive_id}/delete-impact	get_archive_delete_impact_api_v1_archives__archive_id__delete_impact_get	archives	Get Archive Delete Impact
+GET	/api/v1/archives/{archive_id}/dl/{token}/{filename}	download_archive_for_slicer_api_v1_archives__archive_id__dl__token___filename__get	archives	Download Archive For Slicer
+GET	/api/v1/archives/{archive_id}/download	download_archive_api_v1_archives__archive_id__download_get	archives	Download Archive
+GET	/api/v1/archives/{archive_id}/duplicates	get_archive_duplicates_api_v1_archives__archive_id__duplicates_get	archives	Get Archive Duplicates
+DELETE	/api/v1/archives/{archive_id}/f3d	delete_f3d_api_v1_archives__archive_id__f3d_delete	archives	Delete F3D
+GET	/api/v1/archives/{archive_id}/f3d	download_f3d_api_v1_archives__archive_id__f3d_get	archives	Download F3D
+POST	/api/v1/archives/{archive_id}/f3d	upload_f3d_api_v1_archives__archive_id__f3d_post	archives	Upload F3D
+POST	/api/v1/archives/{archive_id}/favorite	toggle_favorite_api_v1_archives__archive_id__favorite_post	archives	Toggle Favorite
+GET	/api/v1/archives/{archive_id}/filament-requirements	get_filament_requirements_api_v1_archives__archive_id__filament_requirements_get	archives	Get Filament Requirements
+GET	/api/v1/archives/{archive_id}/file/{filename}	download_archive_with_filename_api_v1_archives__archive_id__file__filename__get	archives	Download Archive With Filename
+GET	/api/v1/archives/{archive_id}/gcode	get_gcode_api_v1_archives__archive_id__gcode_get	archives	Get Gcode
+POST	/api/v1/archives/{archive_id}/media-download-token	create_archive_media_download_token_api_v1_archives__archive_id__media_download_token_post	archives	Create Archive Media Download Token
+GET	/api/v1/archives/{archive_id}/media/dl/{token}/{filename}	download_archive_media_with_token_api_v1_archives__archive_id__media_dl__token___filename__get	archives	Download Archive Media With Token
+POST	/api/v1/archives/{archive_id}/photos	upload_photo_api_v1_archives__archive_id__photos_post	archives	Upload Photo
+DELETE	/api/v1/archives/{archive_id}/photos/{filename}	delete_photo_api_v1_archives__archive_id__photos__filename__delete	archives	Delete Photo
+GET	/api/v1/archives/{archive_id}/photos/{filename}	get_photo_api_v1_archives__archive_id__photos__filename__get	archives	Get Photo
+GET	/api/v1/archives/{archive_id}/plate-preview	get_plate_preview_api_v1_archives__archive_id__plate_preview_get	archives	Get Plate Preview
+GET	/api/v1/archives/{archive_id}/plate-thumbnail/{plate_index}	get_plate_thumbnail_api_v1_archives__archive_id__plate_thumbnail__plate_index__get	archives	Get Plate Thumbnail
+GET	/api/v1/archives/{archive_id}/plates	get_archive_plates_api_v1_archives__archive_id__plates_get	archives	Get Archive Plates
+GET	/api/v1/archives/{archive_id}/printer-media	get_archive_printer_media_api_v1_archives__archive_id__printer_media_get	archives	Get Archive Printer Media
+GET	/api/v1/archives/{archive_id}/project-image/{image_path}	get_project_image_api_v1_archives__archive_id__project_image__image_path__get	archives	Get Project Image
+GET	/api/v1/archives/{archive_id}/project-page	get_project_page_api_v1_archives__archive_id__project_page_get	archives	Get Project Page
+PATCH	/api/v1/archives/{archive_id}/project-page	update_project_page_api_v1_archives__archive_id__project_page_patch	archives	Update Project Page
+GET	/api/v1/archives/{archive_id}/qrcode	get_qrcode_api_v1_archives__archive_id__qrcode_get	archives	Get Qrcode
+POST	/api/v1/archives/{archive_id}/reprint	reprint_archive_api_v1_archives__archive_id__reprint_post	archives	Reprint Archive
+POST	/api/v1/archives/{archive_id}/rescan	rescan_archive_api_v1_archives__archive_id__rescan_post	archives	Rescan Archive
+GET	/api/v1/archives/{archive_id}/runs	list_archive_runs_api_v1_archives__archive_id__runs_get	archives	List Archive Runs
+GET	/api/v1/archives/{archive_id}/similar	find_similar_archives_api_v1_archives__archive_id__similar_get	archives	Find Similar Archives
+POST	/api/v1/archives/{archive_id}/slice	slice_archive_api_v1_archives__archive_id__slice_post	archives	Slice Archive
+POST	/api/v1/archives/{archive_id}/slicer-token	create_archive_slicer_token_api_v1_archives__archive_id__slicer_token_post	archives	Create Archive Slicer Token
+DELETE	/api/v1/archives/{archive_id}/source	delete_source_3mf_api_v1_archives__archive_id__source_delete	archives	Delete Source 3Mf
+GET	/api/v1/archives/{archive_id}/source	download_source_3mf_api_v1_archives__archive_id__source_get	archives	Download Source 3Mf
+POST	/api/v1/archives/{archive_id}/source	upload_source_3mf_api_v1_archives__archive_id__source_post	archives	Upload Source 3Mf
+GET	/api/v1/archives/{archive_id}/source-dl/{token}/{filename}	download_source_3mf_for_slicer_with_token_api_v1_archives__archive_id__source_dl__token___filename__get	archives	Download Source 3Mf For Slicer With Token
+POST	/api/v1/archives/{archive_id}/source-slicer-token	create_source_slicer_token_api_v1_archives__archive_id__source_slicer_token_post	archives	Create Source Slicer Token
+GET	/api/v1/archives/{archive_id}/source/{filename}	download_source_3mf_for_slicer_api_v1_archives__archive_id__source__filename__get	archives	Download Source 3Mf For Slicer
+GET	/api/v1/archives/{archive_id}/thumbnail	get_thumbnail_api_v1_archives__archive_id__thumbnail_get	archives	Get Thumbnail
+DELETE	/api/v1/archives/{archive_id}/timelapse	delete_timelapse_api_v1_archives__archive_id__timelapse_delete	archives	Delete Timelapse
+GET	/api/v1/archives/{archive_id}/timelapse	get_timelapse_api_v1_archives__archive_id__timelapse_get	archives	Get Timelapse
+GET	/api/v1/archives/{archive_id}/timelapse/info	get_timelapse_info_api_v1_archives__archive_id__timelapse_info_get	archives	Get Timelapse Info
+POST	/api/v1/archives/{archive_id}/timelapse/process	process_timelapse_api_v1_archives__archive_id__timelapse_process_post	archives	Process Timelapse
+POST	/api/v1/archives/{archive_id}/timelapse/scan	scan_timelapse_api_v1_archives__archive_id__timelapse_scan_post	archives	Scan Timelapse
+POST	/api/v1/archives/{archive_id}/timelapse/select	select_timelapse_api_v1_archives__archive_id__timelapse_select_post	archives	Select Timelapse
+GET	/api/v1/archives/{archive_id}/timelapse/thumbnails	get_timelapse_thumbnails_api_v1_archives__archive_id__timelapse_thumbnails_get	archives	Get Timelapse Thumbnails
+POST	/api/v1/archives/{archive_id}/timelapse/upload	upload_timelapse_api_v1_archives__archive_id__timelapse_upload_post	archives	Upload Timelapse
+DELETE	/api/v1/auth/2fa/admin/{user_id}	admin_disable_2fa_api_v1_auth_2fa_admin__user_id__delete	2fa,oidc	Admin Disable 2Fa
+POST	/api/v1/auth/2fa/email/disable	disable_email_otp_api_v1_auth_2fa_email_disable_post	2fa,oidc	Disable Email Otp
+POST	/api/v1/auth/2fa/email/enable	enable_email_otp_api_v1_auth_2fa_email_enable_post	2fa,oidc	Enable Email Otp
+POST	/api/v1/auth/2fa/email/enable/confirm	confirm_enable_email_otp_api_v1_auth_2fa_email_enable_confirm_post	2fa,oidc	Confirm Enable Email Otp
+POST	/api/v1/auth/2fa/email/send	send_email_otp_api_v1_auth_2fa_email_send_post	2fa,oidc	Send Email Otp
+GET	/api/v1/auth/2fa/status	get_2fa_status_api_v1_auth_2fa_status_get	2fa,oidc	Get 2Fa Status
+POST	/api/v1/auth/2fa/totp/disable	disable_totp_api_v1_auth_2fa_totp_disable_post	2fa,oidc	Disable Totp
+POST	/api/v1/auth/2fa/totp/enable	enable_totp_api_v1_auth_2fa_totp_enable_post	2fa,oidc	Enable Totp
+POST	/api/v1/auth/2fa/totp/regenerate-backup-codes	regenerate_backup_codes_api_v1_auth_2fa_totp_regenerate_backup_codes_post	2fa,oidc	Regenerate Backup Codes
+POST	/api/v1/auth/2fa/totp/setup	setup_totp_api_v1_auth_2fa_totp_setup_post	2fa,oidc	Setup Totp
+POST	/api/v1/auth/2fa/verify	verify_2fa_api_v1_auth_2fa_verify_post	2fa,oidc	Verify 2Fa
+POST	/api/v1/auth/advanced-auth/disable	disable_advanced_auth_api_v1_auth_advanced_auth_disable_post	authentication	Disable Advanced Auth
+POST	/api/v1/auth/advanced-auth/enable	enable_advanced_auth_api_v1_auth_advanced_auth_enable_post	authentication	Enable Advanced Auth
+GET	/api/v1/auth/advanced-auth/status	get_advanced_auth_status_api_v1_auth_advanced_auth_status_get	authentication	Get Advanced Auth Status
+POST	/api/v1/auth/disable	disable_auth_api_v1_auth_disable_post	authentication	Disable Auth
+GET	/api/v1/auth/encryption-status	get_encryption_status_api_v1_auth_encryption_status_get	authentication	Get Encryption Status
+POST	/api/v1/auth/forgot-password	forgot_password_api_v1_auth_forgot_password_post	authentication	Forgot Password
+POST	/api/v1/auth/forgot-password/confirm	forgot_password_confirm_api_v1_auth_forgot_password_confirm_post	authentication	Forgot Password Confirm
+POST	/api/v1/auth/ldap/provision	provision_ldap_user_api_v1_auth_ldap_provision_post	authentication	Provision Ldap User
+GET	/api/v1/auth/ldap/search	search_ldap_directory_api_v1_auth_ldap_search_get	authentication	Search Ldap Directory
+GET	/api/v1/auth/ldap/status	get_ldap_status_api_v1_auth_ldap_status_get	authentication	Get Ldap Status
+POST	/api/v1/auth/ldap/test	test_ldap_api_v1_auth_ldap_test_post	authentication	Test Ldap
+POST	/api/v1/auth/login	login_api_v1_auth_login_post	authentication	Login
+POST	/api/v1/auth/logout	logout_api_v1_auth_logout_post	authentication	Logout
+GET	/api/v1/auth/me	get_current_user_info_api_v1_auth_me_get	authentication	Get Current User Info
+POST	/api/v1/auth/media-token	mint_media_token_api_v1_auth_media_token_post	authentication	Mint Media Token
+GET	/api/v1/auth/oidc/authorize/{provider_id}	oidc_authorize_api_v1_auth_oidc_authorize__provider_id__get	2fa,oidc	Oidc Authorize
+GET	/api/v1/auth/oidc/callback	oidc_callback_api_v1_auth_oidc_callback_get	2fa,oidc	Oidc Callback
+POST	/api/v1/auth/oidc/exchange	oidc_exchange_api_v1_auth_oidc_exchange_post	2fa,oidc	Oidc Exchange
+GET	/api/v1/auth/oidc/links	list_oidc_links_api_v1_auth_oidc_links_get	2fa,oidc	List Oidc Links
+DELETE	/api/v1/auth/oidc/links/{provider_id}	remove_oidc_link_api_v1_auth_oidc_links__provider_id__delete	2fa,oidc	Remove Oidc Link
+GET	/api/v1/auth/oidc/providers	list_oidc_providers_api_v1_auth_oidc_providers_get	2fa,oidc	List Oidc Providers
+POST	/api/v1/auth/oidc/providers	create_oidc_provider_api_v1_auth_oidc_providers_post	2fa,oidc	Create Oidc Provider
+GET	/api/v1/auth/oidc/providers/all	list_all_oidc_providers_api_v1_auth_oidc_providers_all_get	2fa,oidc	List All Oidc Providers
+DELETE	/api/v1/auth/oidc/providers/{provider_id}	delete_oidc_provider_api_v1_auth_oidc_providers__provider_id__delete	2fa,oidc	Delete Oidc Provider
+PUT	/api/v1/auth/oidc/providers/{provider_id}	update_oidc_provider_api_v1_auth_oidc_providers__provider_id__put	2fa,oidc	Update Oidc Provider
+DELETE	/api/v1/auth/oidc/providers/{provider_id}/icon	delete_oidc_provider_icon_api_v1_auth_oidc_providers__provider_id__icon_delete	2fa,oidc	Delete Oidc Provider Icon
+GET	/api/v1/auth/oidc/providers/{provider_id}/icon	get_oidc_provider_icon_api_v1_auth_oidc_providers__provider_id__icon_get	2fa,oidc	Get Oidc Provider Icon
+POST	/api/v1/auth/oidc/providers/{provider_id}/icon/refresh	refresh_oidc_provider_icon_api_v1_auth_oidc_providers__provider_id__icon_refresh_post	2fa,oidc	Refresh Oidc Provider Icon
+POST	/api/v1/auth/reset-password	reset_user_password_api_v1_auth_reset_password_post	authentication	Reset User Password
+POST	/api/v1/auth/setup	setup_auth_api_v1_auth_setup_post	authentication	Setup Auth
+GET	/api/v1/auth/smtp	get_smtp_config_api_v1_auth_smtp_get	authentication	Get Smtp Config
+POST	/api/v1/auth/smtp	save_smtp_config_api_v1_auth_smtp_post	authentication	Save Smtp Config
+POST	/api/v1/auth/smtp/test	test_smtp_connection_api_v1_auth_smtp_test_post	authentication	Test Smtp Connection
+GET	/api/v1/auth/status	get_auth_status_api_v1_auth_status_get	authentication	Get Auth Status
+GET	/api/v1/auth/tokens	list_long_lived_tokens_api_v1_auth_tokens_get	authentication	List Long Lived Tokens
+POST	/api/v1/auth/tokens	create_long_lived_camera_token_api_v1_auth_tokens_post	authentication	Create Long Lived Camera Token
+GET	/api/v1/auth/tokens/all	list_all_long_lived_tokens_api_v1_auth_tokens_all_get	authentication	List All Long Lived Tokens
+DELETE	/api/v1/auth/tokens/{token_id}	revoke_long_lived_token_api_v1_auth_tokens__token_id__delete	authentication	Revoke Long Lived Token
+POST	/api/v1/auth/ws-token	mint_websocket_token_api_v1_auth_ws_token_post	authentication	Mint Websocket Token
+POST	/api/v1/bug-report/start-logging	start_logging_api_v1_bug_report_start_logging_post	bug-report	Start Logging
+POST	/api/v1/bug-report/stop-logging	stop_logging_api_v1_bug_report_stop_logging_post	bug-report	Stop Logging
+POST	/api/v1/bug-report/submit	submit_bug_report_api_v1_bug_report_submit_post	bug-report	Submit Bug Report
+GET	/api/v1/camwall/printers	list_camwall_printers_api_v1_camwall_printers_get	camwall	List Camwall Printers
+GET	/api/v1/cloud/builtin-filaments	get_builtin_filaments_api_v1_cloud_builtin_filaments_get	cloud	Get Builtin Filaments
+GET	/api/v1/cloud/devices	get_devices_api_v1_cloud_devices_get	cloud	Get Devices
+GET	/api/v1/cloud/fields	get_all_preset_fields_api_v1_cloud_fields_get	cloud	Get All Preset Fields
+GET	/api/v1/cloud/fields/{preset_type}	get_preset_fields_api_v1_cloud_fields__preset_type__get	cloud	Get Preset Fields
+GET	/api/v1/cloud/filament-id-map	get_filament_id_map_api_v1_cloud_filament_id_map_get	cloud	Get Filament Id Map
+POST	/api/v1/cloud/filament-info	get_filament_info_api_v1_cloud_filament_info_post	cloud	Get Filament Info
+GET	/api/v1/cloud/filaments	get_filament_presets_api_v1_cloud_filaments_get	cloud	Get Filament Presets
+GET	/api/v1/cloud/firmware-updates	get_firmware_updates_api_v1_cloud_firmware_updates_get	cloud	Get Firmware Updates
+POST	/api/v1/cloud/login	login_api_v1_cloud_login_post	cloud	Login
+POST	/api/v1/cloud/logout	logout_api_v1_cloud_logout_post	cloud	Logout
+GET	/api/v1/cloud/settings	get_slicer_settings_api_v1_cloud_settings_get	cloud	Get Slicer Settings
+POST	/api/v1/cloud/settings	create_setting_api_v1_cloud_settings_post	cloud	Create Setting
+DELETE	/api/v1/cloud/settings/{setting_id}	delete_setting_api_v1_cloud_settings__setting_id__delete	cloud	Delete Setting
+GET	/api/v1/cloud/settings/{setting_id}	get_setting_detail_api_v1_cloud_settings__setting_id__get	cloud	Get Setting Detail
+PUT	/api/v1/cloud/settings/{setting_id}	update_setting_api_v1_cloud_settings__setting_id__put	cloud	Update Setting
+GET	/api/v1/cloud/status	get_auth_status_api_v1_cloud_status_get	cloud	Get Auth Status
+POST	/api/v1/cloud/token	set_token_api_v1_cloud_token_post	cloud	Set Token
+POST	/api/v1/cloud/verify	verify_code_api_v1_cloud_verify_post	cloud	Verify Code
+GET	/api/v1/connect/apps	list_connected_apps_api_v1_connect_apps_get	connected-apps	List Connected Apps
+POST	/api/v1/connect/apps	create_connected_app_api_v1_connect_apps_post	connected-apps	Create Connected App
+DELETE	/api/v1/connect/apps/{app_id}	delete_connected_app_api_v1_connect_apps__app_id__delete	connected-apps	Delete Connected App
+PATCH	/api/v1/connect/apps/{app_id}	update_connected_app_api_v1_connect_apps__app_id__patch	connected-apps	Update Connected App
+POST	/api/v1/connect/apps/{app_id}/rotate-secret	rotate_connected_app_secret_api_v1_connect_apps__app_id__rotate_secret_post	connected-apps	Rotate Connected App Secret
+POST	/api/v1/connect/authorize	authorize_api_v1_connect_authorize_post	connected-apps	Authorize
+GET	/api/v1/connect/authorize/info	authorize_info_api_v1_connect_authorize_info_get	connected-apps	Authorize Info
+POST	/api/v1/connect/token	exchange_code_api_v1_connect_token_post	connected-apps	Exchange Code
+GET	/api/v1/discovery/info	get_discovery_info_api_v1_discovery_info_get	discovery	Get Discovery Info
+GET	/api/v1/discovery/printers	get_discovered_printers_api_v1_discovery_printers_get	discovery	Get Discovered Printers
+POST	/api/v1/discovery/scan	start_subnet_scan_api_v1_discovery_scan_post	discovery	Start Subnet Scan
+GET	/api/v1/discovery/scan/status	get_scan_status_api_v1_discovery_scan_status_get	discovery	Get Scan Status
+POST	/api/v1/discovery/scan/stop	stop_subnet_scan_api_v1_discovery_scan_stop_post	discovery	Stop Subnet Scan
+POST	/api/v1/discovery/start	start_discovery_api_v1_discovery_start_post	discovery	Start Discovery
+GET	/api/v1/discovery/status	get_discovery_status_api_v1_discovery_status_get	discovery	Get Discovery Status
+POST	/api/v1/discovery/stop	stop_discovery_api_v1_discovery_stop_post	discovery	Stop Discovery
+GET	/api/v1/external-links/	list_external_links_api_v1_external_links__get	external-links	List External Links
+POST	/api/v1/external-links/	create_external_link_api_v1_external_links__post	external-links	Create External Link
+PUT	/api/v1/external-links/reorder	reorder_external_links_api_v1_external_links_reorder_put	external-links	Reorder External Links
+DELETE	/api/v1/external-links/{link_id}	delete_external_link_api_v1_external_links__link_id__delete	external-links	Delete External Link
+GET	/api/v1/external-links/{link_id}	get_external_link_api_v1_external_links__link_id__get	external-links	Get External Link
+PATCH	/api/v1/external-links/{link_id}	update_external_link_api_v1_external_links__link_id__patch	external-links	Update External Link
+DELETE	/api/v1/external-links/{link_id}/icon	delete_icon_api_v1_external_links__link_id__icon_delete	external-links	Delete Icon
+GET	/api/v1/external-links/{link_id}/icon	get_icon_api_v1_external_links__link_id__icon_get	external-links	Get Icon
+POST	/api/v1/external-links/{link_id}/icon	upload_icon_api_v1_external_links__link_id__icon_post	external-links	Upload Icon
+GET	/api/v1/filament-catalog/	list_filaments_api_v1_filament_catalog__get	filament-catalog	List Filaments
+POST	/api/v1/filament-catalog/	create_filament_api_v1_filament_catalog__post	filament-catalog	Create Filament
+GET	/api/v1/filament-catalog/by-type/{filament_type}	get_filaments_by_type_api_v1_filament_catalog_by_type__filament_type__get	filament-catalog	Get Filaments By Type
+POST	/api/v1/filament-catalog/calculate-cost	calculate_cost_api_v1_filament_catalog_calculate_cost_post	filament-catalog	Calculate Cost
+POST	/api/v1/filament-catalog/seed-defaults	seed_default_filaments_api_v1_filament_catalog_seed_defaults_post	filament-catalog	Seed Default Filaments
+DELETE	/api/v1/filament-catalog/{filament_id}	delete_filament_api_v1_filament_catalog__filament_id__delete	filament-catalog	Delete Filament
+GET	/api/v1/filament-catalog/{filament_id}	get_filament_api_v1_filament_catalog__filament_id__get	filament-catalog	Get Filament
+PATCH	/api/v1/filament-catalog/{filament_id}	update_filament_api_v1_filament_catalog__filament_id__patch	filament-catalog	Update Filament
+GET	/api/v1/finance/cost-centers	list_cost_centers_api_v1_finance_cost_centers_get	finance	List Cost Centers
+POST	/api/v1/finance/cost-centers	create_cost_center_api_v1_finance_cost_centers_post	finance	Create Cost Center
+GET	/api/v1/finance/cost-centers/mine	get_my_cost_centers_api_v1_finance_cost_centers_mine_get	finance	Get My Cost Centers
+DELETE	/api/v1/finance/cost-centers/{cost_center_id}	delete_cost_center_api_v1_finance_cost_centers__cost_center_id__delete	finance	Delete Cost Center
+GET	/api/v1/finance/cost-centers/{cost_center_id}	get_cost_center_api_v1_finance_cost_centers__cost_center_id__get	finance	Get Cost Center
+PATCH	/api/v1/finance/cost-centers/{cost_center_id}	update_cost_center_api_v1_finance_cost_centers__cost_center_id__patch	finance	Update Cost Center
+PATCH	/api/v1/finance/cost-centers/{cost_center_id}/budgets	update_cost_center_budgets_api_v1_finance_cost_centers__cost_center_id__budgets_patch	finance	Update Cost Center Budgets
+POST	/api/v1/finance/cost-centers/{cost_center_id}/members	upsert_cost_center_member_api_v1_finance_cost_centers__cost_center_id__members_post	finance	Upsert Cost Center Member
+DELETE	/api/v1/finance/cost-centers/{cost_center_id}/members/{user_id}	remove_cost_center_member_api_v1_finance_cost_centers__cost_center_id__members__user_id__delete	finance	Remove Cost Center Member
+GET	/api/v1/finance/me/balance	get_my_balance_api_v1_finance_me_balance_get	finance	Get My Balance
+GET	/api/v1/finance/me/transactions	get_my_transactions_api_v1_finance_me_transactions_get	finance	Get My Transactions
+POST	/api/v1/finance/rebuild-balance-ledger	rebuild_balance_ledger_api_v1_finance_rebuild_balance_ledger_post	finance	Rebuild Balance Ledger
+GET	/api/v1/finance/transactions	get_all_transactions_api_v1_finance_transactions_get	finance	Get All Transactions
+POST	/api/v1/finance/transactions/manual	create_manual_print_api_v1_finance_transactions_manual_post	finance	Create Manual Print
+DELETE	/api/v1/finance/transactions/{transaction_id}	delete_transaction_api_v1_finance_transactions__transaction_id__delete	finance	Delete Transaction
+PATCH	/api/v1/finance/transactions/{transaction_id}	edit_transaction_api_v1_finance_transactions__transaction_id__patch	finance	Edit Transaction
+GET	/api/v1/finance/users/{user_id}/balance	get_user_balance_api_v1_finance_users__user_id__balance_get	finance	Get User Balance
+POST	/api/v1/finance/users/{user_id}/deposit	deposit_user_balance_api_v1_finance_users__user_id__deposit_post	finance	Deposit User Balance
+GET	/api/v1/finance/users/{user_id}/transactions	get_user_transactions_api_v1_finance_users__user_id__transactions_get	finance	Get User Transactions
+POST	/api/v1/finance/users/{user_id}/withdraw	withdraw_user_balance_api_v1_finance_users__user_id__withdraw_post	finance	Withdraw User Balance
+GET	/api/v1/firmware/latest	get_all_latest_firmware_api_v1_firmware_latest_get	firmware	Get All Latest Firmware
+GET	/api/v1/firmware/updates	check_firmware_updates_api_v1_firmware_updates_get	firmware	Check Firmware Updates
+GET	/api/v1/firmware/updates/{printer_id}	check_printer_firmware_api_v1_firmware_updates__printer_id__get	firmware	Check Printer Firmware
+GET	/api/v1/firmware/updates/{printer_id}/prepare	prepare_firmware_upload_api_v1_firmware_updates__printer_id__prepare_get	firmware	Prepare Firmware Upload
+POST	/api/v1/firmware/updates/{printer_id}/upload	start_firmware_upload_api_v1_firmware_updates__printer_id__upload_post	firmware	Start Firmware Upload
+GET	/api/v1/firmware/updates/{printer_id}/upload/status	get_firmware_upload_status_api_v1_firmware_updates__printer_id__upload_status_get	firmware	Get Firmware Upload Status
+GET	/api/v1/github-backup/cloud-accounts	get_cloud_accounts_api_v1_github_backup_cloud_accounts_get	github-backup	Get Cloud Accounts
+GET	/api/v1/github-backup/commits	list_commits_api_v1_github_backup_commits_get	github-backup	List Commits
+DELETE	/api/v1/github-backup/config	delete_config_api_v1_github_backup_config_delete	github-backup	Delete Config
+GET	/api/v1/github-backup/config	get_config_api_v1_github_backup_config_get	github-backup	Get Config
+PATCH	/api/v1/github-backup/config	update_config_api_v1_github_backup_config_patch	github-backup	Update Config
+POST	/api/v1/github-backup/config	save_config_api_v1_github_backup_config_post	github-backup	Save Config
+DELETE	/api/v1/github-backup/logs	clear_logs_api_v1_github_backup_logs_delete	github-backup	Clear Logs
+GET	/api/v1/github-backup/logs	get_logs_api_v1_github_backup_logs_get	github-backup	Get Logs
+POST	/api/v1/github-backup/restore	restore_backup_api_v1_github_backup_restore_post	github-backup	Restore Backup
+GET	/api/v1/github-backup/restore/preview	preview_restore_api_v1_github_backup_restore_preview_get	github-backup	Preview Restore
+POST	/api/v1/github-backup/run	trigger_backup_api_v1_github_backup_run_post	github-backup	Trigger Backup
+GET	/api/v1/github-backup/status	get_status_api_v1_github_backup_status_get	github-backup	Get Status
+POST	/api/v1/github-backup/test	test_connection_api_v1_github_backup_test_post	github-backup	Test Connection
+POST	/api/v1/github-backup/test-stored	test_stored_connection_api_v1_github_backup_test_stored_post	github-backup	Test Stored Connection
+GET	/api/v1/groups	list_groups_api_v1_groups_get	groups	List Groups
+POST	/api/v1/groups	create_group_api_v1_groups_post	groups	Create Group
+GET	/api/v1/groups/	list_groups_api_v1_groups__get	groups	List Groups
+POST	/api/v1/groups/	create_group_api_v1_groups__post	groups	Create Group
+GET	/api/v1/groups/permissions	list_permissions_api_v1_groups_permissions_get	groups	List Permissions
+DELETE	/api/v1/groups/{group_id}	delete_group_api_v1_groups__group_id__delete	groups	Delete Group
+GET	/api/v1/groups/{group_id}	get_group_api_v1_groups__group_id__get	groups	Get Group
+PATCH	/api/v1/groups/{group_id}	update_group_api_v1_groups__group_id__patch	groups	Update Group
+DELETE	/api/v1/groups/{group_id}/users/{user_id}	remove_user_from_group_api_v1_groups__group_id__users__user_id__delete	groups	Remove User From Group
+POST	/api/v1/groups/{group_id}/users/{user_id}	add_user_to_group_api_v1_groups__group_id__users__user_id__post	groups	Add User To Group
+GET	/api/v1/ha-sensors/	list_ha_sensors_api_v1_ha_sensors__get	ha-sensors	List Ha Sensors
+POST	/api/v1/ha-sensors/	create_ha_sensor_api_v1_ha_sensors__post	ha-sensors	Create Ha Sensor
+GET	/api/v1/ha-sensors/by-printer/{printer_id}/readings	get_printer_sensor_readings_api_v1_ha_sensors_by_printer__printer_id__readings_get	ha-sensors	Get Printer Sensor Readings
+GET	/api/v1/ha-sensors/entities	list_bindable_entities_api_v1_ha_sensors_entities_get	ha-sensors	List Bindable Entities
+DELETE	/api/v1/ha-sensors/{sensor_id}	delete_ha_sensor_api_v1_ha_sensors__sensor_id__delete	ha-sensors	Delete Ha Sensor
+GET	/api/v1/ha-sensors/{sensor_id}	get_ha_sensor_api_v1_ha_sensors__sensor_id__get	ha-sensors	Get Ha Sensor
+PATCH	/api/v1/ha-sensors/{sensor_id}	update_ha_sensor_api_v1_ha_sensors__sensor_id__patch	ha-sensors	Update Ha Sensor
+GET	/api/v1/inventory/assignments	list_assignments_api_v1_inventory_assignments_get	inventory	List Assignments
+POST	/api/v1/inventory/assignments	assign_spool_api_v1_inventory_assignments_post	inventory	Assign Spool
+DELETE	/api/v1/inventory/assignments/{printer_id}/{ams_id}/{tray_id}	unassign_spool_api_v1_inventory_assignments__printer_id___ams_id___tray_id__delete	inventory	Unassign Spool
+GET	/api/v1/inventory/catalog	get_spool_catalog_api_v1_inventory_catalog_get	inventory	Get Spool Catalog
+POST	/api/v1/inventory/catalog	add_catalog_entry_api_v1_inventory_catalog_post	inventory	Add Catalog Entry
+POST	/api/v1/inventory/catalog/bulk-delete	bulk_delete_catalog_entries_api_v1_inventory_catalog_bulk_delete_post	inventory	Bulk Delete Catalog Entries
+POST	/api/v1/inventory/catalog/reset	reset_spool_catalog_api_v1_inventory_catalog_reset_post	inventory	Reset Spool Catalog
+DELETE	/api/v1/inventory/catalog/{entry_id}	delete_catalog_entry_api_v1_inventory_catalog__entry_id__delete	inventory	Delete Catalog Entry
+PUT	/api/v1/inventory/catalog/{entry_id}	update_catalog_entry_api_v1_inventory_catalog__entry_id__put	inventory	Update Catalog Entry
+GET	/api/v1/inventory/colors	get_color_catalog_api_v1_inventory_colors_get	inventory	Get Color Catalog
+POST	/api/v1/inventory/colors	add_color_entry_api_v1_inventory_colors_post	inventory	Add Color Entry
+POST	/api/v1/inventory/colors/bulk-delete	bulk_delete_color_entries_api_v1_inventory_colors_bulk_delete_post	inventory	Bulk Delete Color Entries
+GET	/api/v1/inventory/colors/by-material	get_color_by_material_api_v1_inventory_colors_by_material_get	inventory	Get Color By Material
+GET	/api/v1/inventory/colors/lookup	lookup_color_api_v1_inventory_colors_lookup_get	inventory	Lookup Color
+GET	/api/v1/inventory/colors/map	get_color_name_map_api_v1_inventory_colors_map_get	inventory	Get Color Name Map
+POST	/api/v1/inventory/colors/reset	reset_color_catalog_api_v1_inventory_colors_reset_post	inventory	Reset Color Catalog
+GET	/api/v1/inventory/colors/search	search_colors_api_v1_inventory_colors_search_get	inventory	Search Colors
+POST	/api/v1/inventory/colors/sync	sync_from_filamentcolors_api_v1_inventory_colors_sync_post	inventory	Sync From Filamentcolors
+DELETE	/api/v1/inventory/colors/{entry_id}	delete_color_entry_api_v1_inventory_colors__entry_id__delete	inventory	Delete Color Entry
+PUT	/api/v1/inventory/colors/{entry_id}	update_color_entry_api_v1_inventory_colors__entry_id__put	inventory	Update Color Entry
+POST	/api/v1/inventory/labels	render_local_inventory_labels_api_v1_inventory_labels_post	labels	Render Local Inventory Labels
+POST	/api/v1/inventory/labels/preview	preview_local_inventory_label_api_v1_inventory_labels_preview_post	labels	Preview Local Inventory Label
+GET	/api/v1/inventory/locations	list_locations_api_v1_inventory_locations_get	inventory	List Locations
+POST	/api/v1/inventory/locations	create_location_api_v1_inventory_locations_post	inventory	Create Location
+DELETE	/api/v1/inventory/locations/{location_id}	delete_location_api_v1_inventory_locations__location_id__delete	inventory	Delete Location
+PATCH	/api/v1/inventory/locations/{location_id}	update_location_api_v1_inventory_locations__location_id__patch	inventory	Update Location
+DELETE	/api/v1/inventory/shopping-list	clear_shopping_list_api_v1_inventory_shopping_list_delete	inventory	Clear Shopping List
+GET	/api/v1/inventory/shopping-list	get_shopping_list_api_v1_inventory_shopping_list_get	inventory	Get Shopping List
+POST	/api/v1/inventory/shopping-list	add_to_shopping_list_api_v1_inventory_shopping_list_post	inventory	Add To Shopping List
+DELETE	/api/v1/inventory/shopping-list/{item_id}	remove_from_shopping_list_api_v1_inventory_shopping_list__item_id__delete	inventory	Remove From Shopping List
+PATCH	/api/v1/inventory/shopping-list/{item_id}/status	update_shopping_list_status_api_v1_inventory_shopping_list__item_id__status_patch	inventory	Update Shopping List Status
+GET	/api/v1/inventory/sku-settings	list_sku_settings_api_v1_inventory_sku_settings_get	inventory	List Sku Settings
+POST	/api/v1/inventory/sku-settings	upsert_sku_settings_api_v1_inventory_sku_settings_post	inventory	Upsert Sku Settings
+GET	/api/v1/inventory/spools	list_spools_api_v1_inventory_spools_get	inventory	List Spools
+POST	/api/v1/inventory/spools	create_spool_api_v1_inventory_spools_post	inventory	Create Spool
+POST	/api/v1/inventory/spools/bulk	bulk_create_spools_api_v1_inventory_spools_bulk_post	inventory	Bulk Create Spools
+POST	/api/v1/inventory/spools/bulk-archive	bulk_archive_spools_api_v1_inventory_spools_bulk_archive_post	inventory	Bulk Archive Spools
+POST	/api/v1/inventory/spools/bulk-delete	bulk_delete_spools_api_v1_inventory_spools_bulk_delete_post	inventory	Bulk Delete Spools
+POST	/api/v1/inventory/spools/bulk-restore	bulk_restore_spools_api_v1_inventory_spools_bulk_restore_post	inventory	Bulk Restore Spools
+POST	/api/v1/inventory/spools/bulk-update	bulk_update_spools_api_v1_inventory_spools_bulk_update_post	inventory	Bulk Update Spools
+GET	/api/v1/inventory/spools/by-tag	get_spool_by_tag_api_v1_inventory_spools_by_tag_get	inventory	Get Spool By Tag
+GET	/api/v1/inventory/spools/export	export_spools_csv_api_v1_inventory_spools_export_get	inventory	Export Spools Csv
+POST	/api/v1/inventory/spools/from-slot	create_spool_from_slot_api_v1_inventory_spools_from_slot_post	inventory	Create Spool From Slot
+POST	/api/v1/inventory/spools/import	import_spools_csv_api_v1_inventory_spools_import_post	inventory	Import Spools Csv
+POST	/api/v1/inventory/spools/reset-consumed-counter-bulk	bulk_reset_spool_consumed_counter_api_v1_inventory_spools_reset_consumed_counter_bulk_post	inventory	Bulk Reset Spool Consumed Counter
+DELETE	/api/v1/inventory/spools/{spool_id}	delete_spool_api_v1_inventory_spools__spool_id__delete	inventory	Delete Spool
+GET	/api/v1/inventory/spools/{spool_id}	get_spool_api_v1_inventory_spools__spool_id__get	inventory	Get Spool
+PATCH	/api/v1/inventory/spools/{spool_id}	update_spool_api_v1_inventory_spools__spool_id__patch	inventory	Update Spool
+POST	/api/v1/inventory/spools/{spool_id}/archive	archive_spool_api_v1_inventory_spools__spool_id__archive_post	inventory	Archive Spool
+GET	/api/v1/inventory/spools/{spool_id}/filament-presets	list_filament_presets_api_v1_inventory_spools__spool_id__filament_presets_get	inventory	List Filament Presets
+PUT	/api/v1/inventory/spools/{spool_id}/filament-presets	replace_filament_presets_api_v1_inventory_spools__spool_id__filament_presets_put	inventory	Replace Filament Presets
+GET	/api/v1/inventory/spools/{spool_id}/k-profiles	list_k_profiles_api_v1_inventory_spools__spool_id__k_profiles_get	inventory	List K Profiles
+PUT	/api/v1/inventory/spools/{spool_id}/k-profiles	replace_k_profiles_api_v1_inventory_spools__spool_id__k_profiles_put	inventory	Replace K Profiles
+PATCH	/api/v1/inventory/spools/{spool_id}/link-tag	link_tag_to_spool_api_v1_inventory_spools__spool_id__link_tag_patch	inventory	Link Tag To Spool
+POST	/api/v1/inventory/spools/{spool_id}/reset-consumed-counter	reset_spool_consumed_counter_api_v1_inventory_spools__spool_id__reset_consumed_counter_post	inventory	Reset Spool Consumed Counter
+POST	/api/v1/inventory/spools/{spool_id}/restore	restore_spool_api_v1_inventory_spools__spool_id__restore_post	inventory	Restore Spool
+PUT	/api/v1/inventory/spools/{spool_id}/suppliers	replace_spool_suppliers_api_v1_inventory_spools__spool_id__suppliers_put	inventory	Replace Spool Suppliers
+DELETE	/api/v1/inventory/spools/{spool_id}/usage	clear_spool_usage_history_api_v1_inventory_spools__spool_id__usage_delete	inventory	Clear Spool Usage History
+GET	/api/v1/inventory/spools/{spool_id}/usage	get_spool_usage_history_api_v1_inventory_spools__spool_id__usage_get	inventory	Get Spool Usage History
+GET	/api/v1/inventory/stats/material-numbers	get_material_number_stats_api_v1_inventory_stats_material_numbers_get	inventory	Get Material Number Stats
+GET	/api/v1/inventory/stats/suppliers	get_supplier_stats_api_v1_inventory_stats_suppliers_get	inventory	Get Supplier Stats
+GET	/api/v1/inventory/suppliers	list_suppliers_api_v1_inventory_suppliers_get	inventory	List Suppliers
+POST	/api/v1/inventory/suppliers	create_supplier_api_v1_inventory_suppliers_post	inventory	Create Supplier
+DELETE	/api/v1/inventory/suppliers/{supplier_id}	delete_supplier_api_v1_inventory_suppliers__supplier_id__delete	inventory	Delete Supplier
+PATCH	/api/v1/inventory/suppliers/{supplier_id}	update_supplier_api_v1_inventory_suppliers__supplier_id__patch	inventory	Update Supplier
+POST	/api/v1/inventory/sync-ams-weights	sync_weights_from_ams_api_v1_inventory_sync_ams_weights_post	inventory	Sync Weights From Ams
+GET	/api/v1/inventory/usage	get_all_usage_history_api_v1_inventory_usage_get	inventory	Get All Usage History
+POST	/api/v1/library/bulk-delete	bulk_delete_api_v1_library_bulk_delete_post	library	Bulk Delete
+GET	/api/v1/library/files	list_files_api_v1_library_files_get	library	List Files
+POST	/api/v1/library/files	upload_file_api_v1_library_files_post	library	Upload File
+GET	/api/v1/library/files/	list_files_api_v1_library_files__get	library	List Files
+POST	/api/v1/library/files/	upload_file_api_v1_library_files__post	library	Upload File
+POST	/api/v1/library/files/add-to-queue	add_files_to_queue_api_v1_library_files_add_to_queue_post	library	Add Files To Queue
+POST	/api/v1/library/files/combine	combine_files_api_v1_library_files_combine_post	library	Combine Files
+POST	/api/v1/library/files/extract-zip	extract_zip_file_api_v1_library_files_extract_zip_post	library	Extract Zip File
+POST	/api/v1/library/files/move	move_files_api_v1_library_files_move_post	library	Move Files
+DELETE	/api/v1/library/files/{file_id}	delete_file_api_v1_library_files__file_id__delete	library	Delete File
+GET	/api/v1/library/files/{file_id}	get_file_api_v1_library_files__file_id__get	library	Get File
+PUT	/api/v1/library/files/{file_id}	update_file_api_v1_library_files__file_id__put	library	Update File
+GET	/api/v1/library/files/{file_id}/dl/{token}/{filename}	download_library_file_for_slicer_api_v1_library_files__file_id__dl__token___filename__get	library	Download Library File For Slicer
+GET	/api/v1/library/files/{file_id}/download	download_file_api_v1_library_files__file_id__download_get	library	Download File
+GET	/api/v1/library/files/{file_id}/filament-requirements	get_library_file_filament_requirements_api_v1_library_files__file_id__filament_requirements_get	library	Get Library File Filament Requirements
+GET	/api/v1/library/files/{file_id}/gcode	get_gcode_api_v1_library_files__file_id__gcode_get	library	Get Gcode
+POST	/api/v1/library/files/{file_id}/photos	upload_file_photo_api_v1_library_files__file_id__photos_post	library	Upload File Photo
+DELETE	/api/v1/library/files/{file_id}/photos/{filename}	delete_file_photo_api_v1_library_files__file_id__photos__filename__delete	library	Delete File Photo
+GET	/api/v1/library/files/{file_id}/photos/{filename}	get_file_photo_api_v1_library_files__file_id__photos__filename__get	library	Get File Photo
+GET	/api/v1/library/files/{file_id}/plate-thumbnail/{plate_index}	get_library_file_plate_thumbnail_api_v1_library_files__file_id__plate_thumbnail__plate_index__get	library	Get Library File Plate Thumbnail
+GET	/api/v1/library/files/{file_id}/plates	get_library_file_plates_api_v1_library_files__file_id__plates_get	library	Get Library File Plates
+POST	/api/v1/library/files/{file_id}/preview-thumbnail	upload_preview_thumbnail_api_v1_library_files__file_id__preview_thumbnail_post	library	Upload Preview Thumbnail
+POST	/api/v1/library/files/{file_id}/print	print_library_file_api_v1_library_files__file_id__print_post	library	Print Library File
+POST	/api/v1/library/files/{file_id}/slice	slice_library_file_api_v1_library_files__file_id__slice_post	library	Slice Library File
+POST	/api/v1/library/files/{file_id}/slicer-token	create_library_slicer_token_api_v1_library_files__file_id__slicer_token_post	library	Create Library Slicer Token
+GET	/api/v1/library/files/{file_id}/thumbnail	get_thumbnail_api_v1_library_files__file_id__thumbnail_get	library	Get Thumbnail
+GET	/api/v1/library/folders	list_folders_api_v1_library_folders_get	library	List Folders
+POST	/api/v1/library/folders	create_folder_api_v1_library_folders_post	library	Create Folder
+GET	/api/v1/library/folders/	list_folders_api_v1_library_folders__get	library	List Folders
+POST	/api/v1/library/folders/	create_folder_api_v1_library_folders__post	library	Create Folder
+GET	/api/v1/library/folders/by-archive/{archive_id}	get_folders_by_archive_api_v1_library_folders_by_archive__archive_id__get	library	Get Folders By Archive
+GET	/api/v1/library/folders/by-project/{project_id}	get_folders_by_project_api_v1_library_folders_by_project__project_id__get	library	Get Folders By Project
+POST	/api/v1/library/folders/external	create_external_folder_api_v1_library_folders_external_post	library	Create External Folder
+DELETE	/api/v1/library/folders/{folder_id}	delete_folder_api_v1_library_folders__folder_id__delete	library	Delete Folder
+GET	/api/v1/library/folders/{folder_id}	get_folder_api_v1_library_folders__folder_id__get	library	Get Folder
+PUT	/api/v1/library/folders/{folder_id}	update_folder_api_v1_library_folders__folder_id__put	library	Update Folder
+GET	/api/v1/library/folders/{folder_id}/readme	get_folder_readme_api_v1_library_folders__folder_id__readme_get	library	Get Folder Readme
+POST	/api/v1/library/folders/{folder_id}/scan	scan_external_folder_api_v1_library_folders__folder_id__scan_post	library	Scan External Folder
+POST	/api/v1/library/generate-stl-thumbnails	batch_generate_stl_thumbnails_api_v1_library_generate_stl_thumbnails_post	library	Batch Generate Stl Thumbnails
+POST	/api/v1/library/purge	execute_purge_api_v1_library_purge_post	library-trash	Execute Purge
+GET	/api/v1/library/purge/preview	preview_purge_api_v1_library_purge_preview_get	library-trash	Preview Purge
+GET	/api/v1/library/stats	get_library_stats_api_v1_library_stats_get	library	Get Library Stats
+GET	/api/v1/library/tags	list_tags_api_v1_library_tags_get	library-tags	List Tags
+POST	/api/v1/library/tags	create_tag_api_v1_library_tags_post	library-tags	Create Tag
+GET	/api/v1/library/tags/	list_tags_api_v1_library_tags__get	library-tags	List Tags
+POST	/api/v1/library/tags/	create_tag_api_v1_library_tags__post	library-tags	Create Tag
+POST	/api/v1/library/tags/bulk-assign	bulk_assign_api_v1_library_tags_bulk_assign_post	library-tags	Bulk Assign
+DELETE	/api/v1/library/tags/{tag_id}	delete_tag_api_v1_library_tags__tag_id__delete	library-tags	Delete Tag
+PATCH	/api/v1/library/tags/{tag_id}	update_tag_api_v1_library_tags__tag_id__patch	library-tags	Update Tag
+DELETE	/api/v1/library/trash	empty_trash_api_v1_library_trash_delete	library-trash	Empty Trash
+GET	/api/v1/library/trash	list_trash_api_v1_library_trash_get	library-trash	List Trash
+GET	/api/v1/library/trash/settings	get_trash_settings_api_v1_library_trash_settings_get	library-trash	Get Trash Settings
+PUT	/api/v1/library/trash/settings	update_trash_settings_api_v1_library_trash_settings_put	library-trash	Update Trash Settings
+DELETE	/api/v1/library/trash/{file_id}	hard_delete_from_trash_api_v1_library_trash__file_id__delete	library-trash	Hard Delete From Trash
+POST	/api/v1/library/trash/{file_id}/restore	restore_from_trash_api_v1_library_trash__file_id__restore_post	library-trash	Restore From Trash
+POST	/api/v1/library/variant-groups	create_variant_group_api_v1_library_variant_groups_post	library-variants	Create Variant Group
+POST	/api/v1/library/variant-groups/	create_variant_group_api_v1_library_variant_groups__post	library-variants	Create Variant Group
+GET	/api/v1/library/variant-groups/by-file/{file_id}	get_group_for_file_api_v1_library_variant_groups_by_file__file_id__get	library-variants	Get Group For File
+DELETE	/api/v1/library/variant-groups/{group_id}	delete_variant_group_api_v1_library_variant_groups__group_id__delete	library-variants	Delete Variant Group
+GET	/api/v1/library/variant-groups/{group_id}	get_variant_group_api_v1_library_variant_groups__group_id__get	library-variants	Get Variant Group
+PATCH	/api/v1/library/variant-groups/{group_id}	update_variant_group_api_v1_library_variant_groups__group_id__patch	library-variants	Update Variant Group
+POST	/api/v1/library/variant-groups/{group_id}/members	add_variant_group_member_api_v1_library_variant_groups__group_id__members_post	library-variants	Add Variant Group Member
+DELETE	/api/v1/library/variant-groups/{group_id}/members/{file_id}	remove_variant_group_member_api_v1_library_variant_groups__group_id__members__file_id__delete	library-variants	Remove Variant Group Member
+GET	/api/v1/local-backup/backups	list_backups_api_v1_local_backup_backups_get	local-backup	List Backups
+DELETE	/api/v1/local-backup/backups/{filename}	delete_backup_api_v1_local_backup_backups__filename__delete	local-backup	Delete Backup
+GET	/api/v1/local-backup/backups/{filename}/download	download_backup_api_v1_local_backup_backups__filename__download_get	local-backup	Download Backup
+POST	/api/v1/local-backup/backups/{filename}/restore	restore_backup_api_v1_local_backup_backups__filename__restore_post	local-backup	Restore Backup
+GET	/api/v1/local-backup/path-check	check_path_api_v1_local_backup_path_check_get	local-backup	Check Path
+POST	/api/v1/local-backup/run	trigger_backup_api_v1_local_backup_run_post	local-backup	Trigger Backup
+GET	/api/v1/local-backup/status	get_status_api_v1_local_backup_status_get	local-backup	Get Status
+GET	/api/v1/local-presets/	list_local_presets_api_v1_local_presets__get	Local Presets	List Local Presets
+POST	/api/v1/local-presets/	create_local_preset_api_v1_local_presets__post	Local Presets	Create Local Preset
+POST	/api/v1/local-presets/base-cache/refresh	refresh_cache_api_v1_local_presets_base_cache_refresh_post	Local Presets	Refresh Cache
+GET	/api/v1/local-presets/base-cache/status	base_cache_status_api_v1_local_presets_base_cache_status_get	Local Presets	Base Cache Status
+POST	/api/v1/local-presets/import	import_presets_api_v1_local_presets_import_post	Local Presets	Import Presets
+POST	/api/v1/local-presets/reclassify	reclassify_api_v1_local_presets_reclassify_post	Local Presets	Reclassify
+DELETE	/api/v1/local-presets/{preset_id}	delete_local_preset_api_v1_local_presets__preset_id__delete	Local Presets	Delete Local Preset
+GET	/api/v1/local-presets/{preset_id}	get_local_preset_api_v1_local_presets__preset_id__get	Local Presets	Get Local Preset
+PUT	/api/v1/local-presets/{preset_id}	update_local_preset_api_v1_local_presets__preset_id__put	Local Presets	Update Local Preset
+GET	/api/v1/location-ha-sensors/	list_location_ha_sensors_api_v1_location_ha_sensors__get	location-ha-sensors	List Location Ha Sensors
+POST	/api/v1/location-ha-sensors/	create_location_ha_sensor_api_v1_location_ha_sensors__post	location-ha-sensors	Create Location Ha Sensor
+GET	/api/v1/location-ha-sensors/by-location/{location_id}/readings	get_location_sensor_readings_api_v1_location_ha_sensors_by_location__location_id__readings_get	location-ha-sensors	Get Location Sensor Readings
+GET	/api/v1/location-ha-sensors/entities	list_bindable_entities_api_v1_location_ha_sensors_entities_get	location-ha-sensors	List Bindable Entities
+DELETE	/api/v1/location-ha-sensors/{sensor_id}	delete_location_ha_sensor_api_v1_location_ha_sensors__sensor_id__delete	location-ha-sensors	Delete Location Ha Sensor
+GET	/api/v1/location-ha-sensors/{sensor_id}	get_location_ha_sensor_api_v1_location_ha_sensors__sensor_id__get	location-ha-sensors	Get Location Ha Sensor
+PATCH	/api/v1/location-ha-sensors/{sensor_id}	update_location_ha_sensor_api_v1_location_ha_sensors__sensor_id__patch	location-ha-sensors	Update Location Ha Sensor
+DELETE	/api/v1/maintenance/items/{item_id}	remove_maintenance_item_api_v1_maintenance_items__item_id__delete	maintenance	Remove Maintenance Item
+PATCH	/api/v1/maintenance/items/{item_id}	update_printer_maintenance_api_v1_maintenance_items__item_id__patch	maintenance	Update Printer Maintenance
+GET	/api/v1/maintenance/items/{item_id}/history	get_maintenance_history_api_v1_maintenance_items__item_id__history_get	maintenance	Get Maintenance History
+POST	/api/v1/maintenance/items/{item_id}/perform	perform_maintenance_api_v1_maintenance_items__item_id__perform_post	maintenance	Perform Maintenance
+GET	/api/v1/maintenance/overview	get_all_maintenance_overview_api_v1_maintenance_overview_get	maintenance	Get All Maintenance Overview
+GET	/api/v1/maintenance/printers/{printer_id}	get_printer_maintenance_api_v1_maintenance_printers__printer_id__get	maintenance	Get Printer Maintenance
+POST	/api/v1/maintenance/printers/{printer_id}/assign/{type_id}	assign_maintenance_type_api_v1_maintenance_printers__printer_id__assign__type_id__post	maintenance	Assign Maintenance Type
+PATCH	/api/v1/maintenance/printers/{printer_id}/hours	set_printer_hours_api_v1_maintenance_printers__printer_id__hours_patch	maintenance	Set Printer Hours
+GET	/api/v1/maintenance/summary	get_maintenance_summary_api_v1_maintenance_summary_get	maintenance	Get Maintenance Summary
+GET	/api/v1/maintenance/types	get_maintenance_types_api_v1_maintenance_types_get	maintenance	Get Maintenance Types
+POST	/api/v1/maintenance/types	create_maintenance_type_api_v1_maintenance_types_post	maintenance	Create Maintenance Type
+POST	/api/v1/maintenance/types/restore-defaults	restore_default_maintenance_types_api_v1_maintenance_types_restore_defaults_post	maintenance	Restore Default Maintenance Types
+DELETE	/api/v1/maintenance/types/{type_id}	delete_maintenance_type_api_v1_maintenance_types__type_id__delete	maintenance	Delete Maintenance Type
+PATCH	/api/v1/maintenance/types/{type_id}	update_maintenance_type_api_v1_maintenance_types__type_id__patch	maintenance	Update Maintenance Type
+POST	/api/v1/makerworld/import	import_instance_api_v1_makerworld_import_post	makerworld	Import Instance
+GET	/api/v1/makerworld/recent-imports	recent_imports_api_v1_makerworld_recent_imports_get	makerworld	Recent Imports
+POST	/api/v1/makerworld/resolve	resolve_url_api_v1_makerworld_resolve_post	makerworld	Resolve Url
+GET	/api/v1/makerworld/status	get_status_api_v1_makerworld_status_get	makerworld	Get Status
+GET	/api/v1/makerworld/thumbnail	proxy_thumbnail_api_v1_makerworld_thumbnail_get	makerworld	Proxy Thumbnail
+GET	/api/v1/metrics	get_metrics_api_v1_metrics_get	metrics	Get Metrics
+GET	/api/v1/notification-templates	get_templates_api_v1_notification_templates_get	notification-templates	Get Templates
+GET	/api/v1/notification-templates/	get_templates_api_v1_notification_templates__get	notification-templates	Get Templates
+POST	/api/v1/notification-templates/preview	preview_template_api_v1_notification_templates_preview_post	notification-templates	Preview Template
+GET	/api/v1/notification-templates/variables	get_variables_api_v1_notification_templates_variables_get	notification-templates	Get Variables
+GET	/api/v1/notification-templates/{template_id}	get_template_api_v1_notification_templates__template_id__get	notification-templates	Get Template
+PUT	/api/v1/notification-templates/{template_id}	update_template_api_v1_notification_templates__template_id__put	notification-templates	Update Template
+POST	/api/v1/notification-templates/{template_id}/reset	reset_template_api_v1_notification_templates__template_id__reset_post	notification-templates	Reset Template
+GET	/api/v1/notifications/	list_notification_providers_api_v1_notifications__get	notifications	List Notification Providers
+POST	/api/v1/notifications/	create_notification_provider_api_v1_notifications__post	notifications	Create Notification Provider
+POST	/api/v1/notifications/app-message	send_app_message_api_v1_notifications_app_message_post	notifications	Send App Message
+GET	/api/v1/notifications/app-message/channels	app_message_channels_api_v1_notifications_app_message_channels_get	notifications	App Message Channels
+DELETE	/api/v1/notifications/logs	clear_notification_logs_api_v1_notifications_logs_delete	notifications	Clear Notification Logs
+GET	/api/v1/notifications/logs	get_notification_logs_api_v1_notifications_logs_get	notifications	Get Notification Logs
+GET	/api/v1/notifications/logs/stats	get_notification_log_stats_api_v1_notifications_logs_stats_get	notifications	Get Notification Log Stats
+GET	/api/v1/notifications/photos/{filename}	get_notification_photo_api_v1_notifications_photos__filename__get	notifications	Get Notification Photo
+POST	/api/v1/notifications/test-all	test_all_notification_providers_api_v1_notifications_test_all_post	notifications	Test All Notification Providers
+POST	/api/v1/notifications/test-config	test_notification_config_api_v1_notifications_test_config_post	notifications	Test Notification Config
+DELETE	/api/v1/notifications/{provider_id}	delete_notification_provider_api_v1_notifications__provider_id__delete	notifications	Delete Notification Provider
+GET	/api/v1/notifications/{provider_id}	get_notification_provider_api_v1_notifications__provider_id__get	notifications	Get Notification Provider
+PATCH	/api/v1/notifications/{provider_id}	update_notification_provider_api_v1_notifications__provider_id__patch	notifications	Update Notification Provider
+POST	/api/v1/notifications/{provider_id}/test	test_notification_provider_api_v1_notifications__provider_id__test_post	notifications	Test Notification Provider
+GET	/api/v1/obico/cached-frame/{nonce}	cached_frame_api_v1_obico_cached_frame__nonce__get	obico	Cached Frame
+GET	/api/v1/obico/printer-status	get_printer_status_api_v1_obico_printer_status_get	obico	Get Printer Status
+GET	/api/v1/obico/status	get_status_api_v1_obico_status_get	obico	Get Status
+POST	/api/v1/obico/test-connection	test_connection_api_v1_obico_test_connection_post	obico	Test Connection
+POST	/api/v1/orca-cloud/device/poll	device_poll_api_v1_orca_cloud_device_poll_post	orca-cloud	Device Poll
+POST	/api/v1/orca-cloud/device/start	device_start_api_v1_orca_cloud_device_start_post	orca-cloud	Device Start
+POST	/api/v1/orca-cloud/logout	logout_api_v1_orca_cloud_logout_post	orca-cloud	Logout
+GET	/api/v1/orca-cloud/profiles	list_profiles_api_v1_orca_cloud_profiles_get	orca-cloud	List Profiles
+GET	/api/v1/orca-cloud/profiles/{profile_id}	get_profile_api_v1_orca_cloud_profiles__profile_id__get	orca-cloud	Get Profile
+GET	/api/v1/orca-cloud/status	get_status_api_v1_orca_cloud_status_get	orca-cloud	Get Status
+GET	/api/v1/pending-uploads/	list_pending_uploads_api_v1_pending_uploads__get	pending-uploads	List Pending Uploads
+POST	/api/v1/pending-uploads/archive-all	archive_all_pending_api_v1_pending_uploads_archive_all_post	pending-uploads	Archive All Pending
+GET	/api/v1/pending-uploads/count	get_pending_count_api_v1_pending_uploads_count_get	pending-uploads	Get Pending Count
+DELETE	/api/v1/pending-uploads/discard-all	discard_all_pending_api_v1_pending_uploads_discard_all_delete	pending-uploads	Discard All Pending
+DELETE	/api/v1/pending-uploads/{upload_id}	discard_pending_upload_api_v1_pending_uploads__upload_id__delete	pending-uploads	Discard Pending Upload
+GET	/api/v1/pending-uploads/{upload_id}	get_pending_upload_api_v1_pending_uploads__upload_id__get	pending-uploads	Get Pending Upload
+POST	/api/v1/pending-uploads/{upload_id}/archive	archive_pending_upload_api_v1_pending_uploads__upload_id__archive_post	pending-uploads	Archive Pending Upload
+GET	/api/v1/pipeline-runs	list_all_runs_api_v1_pipeline_runs_get	Slicer Pipelines	List All Runs
+POST	/api/v1/pipeline-runs/clear	clear_terminal_runs_api_v1_pipeline_runs_clear_post	Slicer Pipelines	Clear Terminal Runs
+GET	/api/v1/pipeline-runs/{run_id}	get_run_api_v1_pipeline_runs__run_id__get	Slicer Pipelines	Get Run
+POST	/api/v1/pipeline-runs/{run_id}/cancel	cancel_run_api_v1_pipeline_runs__run_id__cancel_post	Slicer Pipelines	Cancel Run
+POST	/api/v1/pipeline-runs/{run_id}/retry-failed	retry_failed_api_v1_pipeline_runs__run_id__retry_failed_post	Slicer Pipelines	Retry Failed
+DELETE	/api/v1/print-log/	clear_print_log_api_v1_print_log__delete	print-log	Clear Print Log
+GET	/api/v1/print-log/	get_print_log_api_v1_print_log__get	print-log	Get Print Log
+DELETE	/api/v1/print-log/{entry_id}	delete_print_log_entry_api_v1_print_log__entry_id__delete	print-log	Delete Print Log Entry
+PATCH	/api/v1/print-log/{entry_id}	update_print_log_entry_api_v1_print_log__entry_id__patch	print-log	Update Print Log Entry
+GET	/api/v1/print-log/{entry_id}/thumbnail	get_print_log_thumbnail_api_v1_print_log__entry_id__thumbnail_get	print-log	Get Print Log Thumbnail
+DELETE	/api/v1/printer-sensor-history/{printer_id}	delete_old_history_api_v1_printer_sensor_history__printer_id__delete	printer-sensor-history	Delete Old History
+GET	/api/v1/printer-sensor-history/{printer_id}	get_printer_sensor_history_api_v1_printer_sensor_history__printer_id__get	printer-sensor-history	Get Printer Sensor History
+GET	/api/v1/printers/	list_printers_api_v1_printers__get	printers	List Printers
+POST	/api/v1/printers/	create_printer_api_v1_printers__post	printers	Create Printer
+GET	/api/v1/printers/available-filaments	get_available_filaments_api_v1_printers_available_filaments_get	printers	Get Available Filaments
+POST	/api/v1/printers/camera/stream-token	create_stream_token_api_v1_printers_camera_stream_token_post	camera	Create Stream Token
+GET	/api/v1/printers/developer-mode-warnings	get_developer_mode_warnings_api_v1_printers_developer_mode_warnings_get	printers	Get Developer Mode Warnings
+POST	/api/v1/printers/diagnostic	diagnose_connection_api_v1_printers_diagnostic_post	printers	Diagnose Connection
+POST	/api/v1/printers/test	test_printer_connection_api_v1_printers_test_post	printers	Test Printer Connection
+GET	/api/v1/printers/usb-cameras	list_usb_cameras_api_v1_printers_usb_cameras_get	printers	List Usb Cameras
+DELETE	/api/v1/printers/{printer_id}	delete_printer_api_v1_printers__printer_id__delete	printers	Delete Printer
+GET	/api/v1/printers/{printer_id}	get_printer_api_v1_printers__printer_id__get	printers	Get Printer
+PATCH	/api/v1/printers/{printer_id}	update_printer_api_v1_printers__printer_id__patch	printers	Update Printer
+POST	/api/v1/printers/{printer_id}/airduct-mode	set_airduct_mode_api_v1_printers__printer_id__airduct_mode_post	printers	Set Airduct Mode
+POST	/api/v1/printers/{printer_id}/ams-backup	set_ams_backup_api_v1_printers__printer_id__ams_backup_post	printers	Set Ams Backup
+GET	/api/v1/printers/{printer_id}/ams-labels	get_ams_labels_api_v1_printers__printer_id__ams_labels_get	printers	Get Ams Labels
+DELETE	/api/v1/printers/{printer_id}/ams-labels/{ams_id}	delete_ams_label_api_v1_printers__printer_id__ams_labels__ams_id__delete	printers	Delete Ams Label
+PUT	/api/v1/printers/{printer_id}/ams-labels/{ams_id}	save_ams_label_api_v1_printers__printer_id__ams_labels__ams_id__put	printers	Save Ams Label
+POST	/api/v1/printers/{printer_id}/ams/load	ams_load_api_v1_printers__printer_id__ams_load_post	printers	Ams Load
+POST	/api/v1/printers/{printer_id}/ams/unload	ams_unload_api_v1_printers__printer_id__ams_unload_post	printers	Ams Unload
+POST	/api/v1/printers/{printer_id}/ams/{ams_id}/slot/{slot_id}/refresh	refresh_ams_slot_api_v1_printers__printer_id__ams__ams_id__slot__slot_id__refresh_post	printers	Refresh Ams Slot
+POST	/api/v1/printers/{printer_id}/ams/{ams_id}/tray/{tray_id}/reset	reset_ams_slot_api_v1_printers__printer_id__ams__ams_id__tray__tray_id__reset_post	printers	Reset Ams Slot
+POST	/api/v1/printers/{printer_id}/bed-jog	bed_jog_api_v1_printers__printer_id__bed_jog_post	printers	Bed Jog
+POST	/api/v1/printers/{printer_id}/calibration	start_calibration_api_v1_printers__printer_id__calibration_post	printers	Start Calibration
+GET	/api/v1/printers/{printer_id}/camera/check-plate	check_plate_empty_api_v1_printers__printer_id__camera_check_plate_get	camera	Check Plate Empty
+POST	/api/v1/printers/{printer_id}/camera/diagnose	diagnose_camera_route_api_v1_printers__printer_id__camera_diagnose_post	camera	Diagnose Camera Route
+POST	/api/v1/printers/{printer_id}/camera/external/test	test_external_camera_api_v1_printers__printer_id__camera_external_test_post	camera	Test External Camera
+DELETE	/api/v1/printers/{printer_id}/camera/plate-detection/calibrate	delete_plate_calibration_api_v1_printers__printer_id__camera_plate_detection_calibrate_delete	camera	Delete Plate Calibration
+POST	/api/v1/printers/{printer_id}/camera/plate-detection/calibrate	calibrate_plate_detection_api_v1_printers__printer_id__camera_plate_detection_calibrate_post	camera	Calibrate Plate Detection
+GET	/api/v1/printers/{printer_id}/camera/plate-detection/references	get_plate_references_api_v1_printers__printer_id__camera_plate_detection_references_get	camera	Get Plate References
+DELETE	/api/v1/printers/{printer_id}/camera/plate-detection/references/{index}	delete_reference_api_v1_printers__printer_id__camera_plate_detection_references__index__delete	camera	Delete Reference
+PUT	/api/v1/printers/{printer_id}/camera/plate-detection/references/{index}	update_reference_label_api_v1_printers__printer_id__camera_plate_detection_references__index__put	camera	Update Reference Label
+GET	/api/v1/printers/{printer_id}/camera/plate-detection/references/{index}/thumbnail	get_reference_thumbnail_api_v1_printers__printer_id__camera_plate_detection_references__index__thumbnail_get	camera	Get Reference Thumbnail
+GET	/api/v1/printers/{printer_id}/camera/plate-detection/status	get_plate_detection_status_api_v1_printers__printer_id__camera_plate_detection_status_get	camera	Get Plate Detection Status
+GET	/api/v1/printers/{printer_id}/camera/snapshot	camera_snapshot_api_v1_printers__printer_id__camera_snapshot_get	camera	Camera Snapshot
+GET	/api/v1/printers/{printer_id}/camera/status	camera_status_api_v1_printers__printer_id__camera_status_get	camera	Camera Status
+GET	/api/v1/printers/{printer_id}/camera/stop	stop_camera_stream_api_v1_printers__printer_id__camera_stop_post	camera	Stop Camera Stream
+POST	/api/v1/printers/{printer_id}/camera/stop	stop_camera_stream_api_v1_printers__printer_id__camera_stop_post	camera	Stop Camera Stream
+GET	/api/v1/printers/{printer_id}/camera/stream	camera_stream_api_v1_printers__printer_id__camera_stream_get	camera	Camera Stream
+GET	/api/v1/printers/{printer_id}/camera/test	test_camera_api_v1_printers__printer_id__camera_test_get	camera	Test Camera
+POST	/api/v1/printers/{printer_id}/chamber-light	set_chamber_light_api_v1_printers__printer_id__chamber_light_post	printers	Set Chamber Light
+POST	/api/v1/printers/{printer_id}/clear-plate	clear_plate_api_v1_printers__printer_id__clear_plate_post	printers	Clear Plate
+POST	/api/v1/printers/{printer_id}/connect	connect_printer_api_v1_printers__printer_id__connect_post	printers	Connect Printer
+GET	/api/v1/printers/{printer_id}/cover	get_printer_cover_api_v1_printers__printer_id__cover_get	printers	Get Printer Cover
+GET	/api/v1/printers/{printer_id}/current-print-user	get_current_print_user_api_v1_printers__printer_id__current_print_user_get	printers	Get Current Print User
+POST	/api/v1/printers/{printer_id}/debug/simulate-print-complete	debug_simulate_print_complete_api_v1_printers__printer_id__debug_simulate_print_complete_post	printers	Debug Simulate Print Complete
+GET	/api/v1/printers/{printer_id}/diagnostic	diagnose_printer_api_v1_printers__printer_id__diagnostic_get	printers	Diagnose Printer
+POST	/api/v1/printers/{printer_id}/disconnect	disconnect_printer_api_v1_printers__printer_id__disconnect_post	printers	Disconnect Printer
+POST	/api/v1/printers/{printer_id}/drying/start	start_drying_api_v1_printers__printer_id__drying_start_post	printers	Start Drying
+POST	/api/v1/printers/{printer_id}/drying/stop	stop_drying_api_v1_printers__printer_id__drying_stop_post	printers	Stop Drying
+POST	/api/v1/printers/{printer_id}/extruder-jog	extruder_jog_api_v1_printers__printer_id__extruder_jog_post	printers	Extruder Jog
+POST	/api/v1/printers/{printer_id}/fan-speed	set_fan_speed_api_v1_printers__printer_id__fan_speed_post	printers	Set Fan Speed
+DELETE	/api/v1/printers/{printer_id}/files	delete_printer_file_api_v1_printers__printer_id__files_delete	printers	Delete Printer File
+GET	/api/v1/printers/{printer_id}/files	list_printer_files_api_v1_printers__printer_id__files_get	printers	List Printer Files
+GET	/api/v1/printers/{printer_id}/files/dl/{token}/{filename}	download_prepared_printer_files_api_v1_printers__printer_id__files_dl__token___filename__get	printers	Download Prepared Printer Files
+GET	/api/v1/printers/{printer_id}/files/download	download_printer_file_api_v1_printers__printer_id__files_download_get	printers	Download Printer File
+POST	/api/v1/printers/{printer_id}/files/download-job	create_printer_files_download_job_api_v1_printers__printer_id__files_download_job_post	printers	Create Printer Files Download Job
+DELETE	/api/v1/printers/{printer_id}/files/download-jobs/{job_id}	cancel_printer_files_download_job_api_v1_printers__printer_id__files_download_jobs__job_id__delete	printers	Cancel Printer Files Download Job
+GET	/api/v1/printers/{printer_id}/files/download-jobs/{job_id}	get_printer_files_download_job_api_v1_printers__printer_id__files_download_jobs__job_id__get	printers	Get Printer Files Download Job
+POST	/api/v1/printers/{printer_id}/files/download-zip	download_printer_files_as_zip_api_v1_printers__printer_id__files_download_zip_post	printers	Download Printer Files As Zip
+GET	/api/v1/printers/{printer_id}/files/gcode	get_printer_file_gcode_api_v1_printers__printer_id__files_gcode_get	printers	Get Printer File Gcode
+GET	/api/v1/printers/{printer_id}/files/plate-thumbnail/{plate_index}	get_printer_file_plate_thumbnail_api_v1_printers__printer_id__files_plate_thumbnail__plate_index__get	printers	Get Printer File Plate Thumbnail
+GET	/api/v1/printers/{printer_id}/files/plates	get_printer_file_plates_api_v1_printers__printer_id__files_plates_get	printers	Get Printer File Plates
+POST	/api/v1/printers/{printer_id}/hms/clear	clear_hms_errors_api_v1_printers__printer_id__hms_clear_post	printers	Clear Hms Errors
+POST	/api/v1/printers/{printer_id}/hms/execute-action	execute_hms_action_api_v1_printers__printer_id__hms_execute_action_post	printers	Execute Hms Action
+POST	/api/v1/printers/{printer_id}/home-axes	home_axes_api_v1_printers__printer_id__home_axes_post	printers	Home Axes
+GET	/api/v1/printers/{printer_id}/inventory-remain	get_inventory_remain_api_v1_printers__printer_id__inventory_remain_get	printers	Get Inventory Remain
+DELETE	/api/v1/printers/{printer_id}/kprofiles/	delete_kprofile_api_v1_printers__printer_id__kprofiles__delete	kprofiles	Delete Kprofile
+GET	/api/v1/printers/{printer_id}/kprofiles/	get_kprofiles_api_v1_printers__printer_id__kprofiles__get	kprofiles	Get Kprofiles
+POST	/api/v1/printers/{printer_id}/kprofiles/	set_kprofile_api_v1_printers__printer_id__kprofiles__post	kprofiles	Set Kprofile
+POST	/api/v1/printers/{printer_id}/kprofiles/batch	set_kprofiles_batch_api_v1_printers__printer_id__kprofiles_batch_post	kprofiles	Set Kprofiles Batch
+GET	/api/v1/printers/{printer_id}/kprofiles/notes	get_kprofile_notes_api_v1_printers__printer_id__kprofiles_notes_get	kprofiles	Get Kprofile Notes
+PUT	/api/v1/printers/{printer_id}/kprofiles/notes	set_kprofile_note_api_v1_printers__printer_id__kprofiles_notes_put	kprofiles	Set Kprofile Note
+DELETE	/api/v1/printers/{printer_id}/kprofiles/notes/{setting_id}	delete_kprofile_note_api_v1_printers__printer_id__kprofiles_notes__setting_id__delete	kprofiles	Delete Kprofile Note
+DELETE	/api/v1/printers/{printer_id}/logging	clear_mqtt_logs_api_v1_printers__printer_id__logging_delete	printers	Clear Mqtt Logs
+GET	/api/v1/printers/{printer_id}/logging	get_mqtt_logs_api_v1_printers__printer_id__logging_get	printers	Get Mqtt Logs
+POST	/api/v1/printers/{printer_id}/logging/disable	disable_mqtt_logging_api_v1_printers__printer_id__logging_disable_post	printers	Disable Mqtt Logging
+POST	/api/v1/printers/{printer_id}/logging/enable	enable_mqtt_logging_api_v1_printers__printer_id__logging_enable_post	printers	Enable Mqtt Logging
+GET	/api/v1/printers/{printer_id}/overlay-status	get_overlay_status_api_v1_printers__printer_id__overlay_status_get	printers	Get Overlay Status
+POST	/api/v1/printers/{printer_id}/print-options	set_print_option_api_v1_printers__printer_id__print_options_post	printers	Set Print Option
+POST	/api/v1/printers/{printer_id}/print-speed	set_print_speed_api_v1_printers__printer_id__print_speed_post	printers	Set Print Speed
+GET	/api/v1/printers/{printer_id}/print/objects	get_printable_objects_api_v1_printers__printer_id__print_objects_get	printers	Get Printable Objects
+POST	/api/v1/printers/{printer_id}/print/pause	pause_print_api_v1_printers__printer_id__print_pause_post	printers	Pause Print
+POST	/api/v1/printers/{printer_id}/print/resume	resume_print_api_v1_printers__printer_id__print_resume_post	printers	Resume Print
+POST	/api/v1/printers/{printer_id}/print/skip-objects	skip_objects_api_v1_printers__printer_id__print_skip_objects_post	printers	Skip Objects
+POST	/api/v1/printers/{printer_id}/print/stop	stop_print_api_v1_printers__printer_id__print_stop_post	printers	Stop Print
+POST	/api/v1/printers/{printer_id}/refresh-status	refresh_printer_status_api_v1_printers__printer_id__refresh_status_post	printers	Refresh Printer Status
+GET	/api/v1/printers/{printer_id}/runtime-debug	get_runtime_debug_api_v1_printers__printer_id__runtime_debug_get	printers	Get Runtime Debug
+POST	/api/v1/printers/{printer_id}/select-extruder	select_extruder_api_v1_printers__printer_id__select_extruder_post	printers	Select Extruder
+GET	/api/v1/printers/{printer_id}/slot-presets	get_slot_presets_api_v1_printers__printer_id__slot_presets_get	printers	Get Slot Presets
+DELETE	/api/v1/printers/{printer_id}/slot-presets/{ams_id}/{tray_id}	delete_slot_preset_api_v1_printers__printer_id__slot_presets__ams_id___tray_id__delete	printers	Delete Slot Preset
+GET	/api/v1/printers/{printer_id}/slot-presets/{ams_id}/{tray_id}	get_slot_preset_api_v1_printers__printer_id__slot_presets__ams_id___tray_id__get	printers	Get Slot Preset
+PUT	/api/v1/printers/{printer_id}/slot-presets/{ams_id}/{tray_id}	save_slot_preset_api_v1_printers__printer_id__slot_presets__ams_id___tray_id__put	printers	Save Slot Preset
+POST	/api/v1/printers/{printer_id}/slots/{ams_id}/{tray_id}/configure	configure_ams_slot_api_v1_printers__printer_id__slots__ams_id___tray_id__configure_post	printers	Configure Ams Slot
+GET	/api/v1/printers/{printer_id}/slots/{ams_id}/{tray_id}/spool-defaults	get_slot_spool_defaults_api_v1_printers__printer_id__slots__ams_id___tray_id__spool_defaults_get	printers	Get Slot Spool Defaults
+GET	/api/v1/printers/{printer_id}/status	get_printer_status_api_v1_printers__printer_id__status_get	printers	Get Printer Status
+GET	/api/v1/printers/{printer_id}/storage	get_printer_storage_api_v1_printers__printer_id__storage_get	printers	Get Printer Storage
+POST	/api/v1/printers/{printer_id}/temperature/bed	set_bed_temperature_api_v1_printers__printer_id__temperature_bed_post	printers	Set Bed Temperature
+POST	/api/v1/printers/{printer_id}/temperature/chamber	set_chamber_temperature_api_v1_printers__printer_id__temperature_chamber_post	printers	Set Chamber Temperature
+POST	/api/v1/printers/{printer_id}/temperature/nozzle	set_nozzle_temperature_api_v1_printers__printer_id__temperature_nozzle_post	printers	Set Nozzle Temperature
+POST	/api/v1/printers/{printer_id}/xy-jog	xy_jog_api_v1_printers__printer_id__xy_jog_post	printers	Xy Jog
+GET	/api/v1/projects	list_projects_api_v1_projects_get	projects	List Projects
+GET	/api/v1/projects/	list_projects_api_v1_projects__get	projects	List Projects
+POST	/api/v1/projects/	create_project_api_v1_projects__post	projects	Create Project
+POST	/api/v1/projects/from-template/{template_id}	create_project_from_template_api_v1_projects_from_template__template_id__post	projects	Create Project From Template
+POST	/api/v1/projects/import	import_project_api_v1_projects_import_post	projects	Import Project
+POST	/api/v1/projects/import/file	import_project_file_api_v1_projects_import_file_post	projects	Import Project File
+GET	/api/v1/projects/templates	list_templates_api_v1_projects_templates_get	projects	List Templates
+DELETE	/api/v1/projects/{project_id}	delete_project_api_v1_projects__project_id__delete	projects	Delete Project
+GET	/api/v1/projects/{project_id}	get_project_api_v1_projects__project_id__get	projects	Get Project
+PATCH	/api/v1/projects/{project_id}	update_project_api_v1_projects__project_id__patch	projects	Update Project
+POST	/api/v1/projects/{project_id}/add-archives	add_archives_to_project_api_v1_projects__project_id__add_archives_post	projects	Add Archives To Project
+POST	/api/v1/projects/{project_id}/add-queue	add_queue_items_to_project_api_v1_projects__project_id__add_queue_post	projects	Add Queue Items To Project
+GET	/api/v1/projects/{project_id}/archives	list_project_archives_api_v1_projects__project_id__archives_get	projects	List Project Archives
+POST	/api/v1/projects/{project_id}/attachments	upload_attachment_api_v1_projects__project_id__attachments_post	projects	Upload Attachment
+DELETE	/api/v1/projects/{project_id}/attachments/{filename}	delete_attachment_api_v1_projects__project_id__attachments__filename__delete	projects	Delete Attachment
+GET	/api/v1/projects/{project_id}/attachments/{filename}	download_attachment_api_v1_projects__project_id__attachments__filename__get	projects	Download Attachment
+GET	/api/v1/projects/{project_id}/bom	list_bom_items_api_v1_projects__project_id__bom_get	projects	List Bom Items
+POST	/api/v1/projects/{project_id}/bom	create_bom_item_api_v1_projects__project_id__bom_post	projects	Create Bom Item
+DELETE	/api/v1/projects/{project_id}/bom/{item_id}	delete_bom_item_api_v1_projects__project_id__bom__item_id__delete	projects	Delete Bom Item
+PATCH	/api/v1/projects/{project_id}/bom/{item_id}	update_bom_item_api_v1_projects__project_id__bom__item_id__patch	projects	Update Bom Item
+DELETE	/api/v1/projects/{project_id}/cover-image	delete_project_cover_image_api_v1_projects__project_id__cover_image_delete	projects	Delete Project Cover Image
+GET	/api/v1/projects/{project_id}/cover-image	get_project_cover_image_api_v1_projects__project_id__cover_image_get	projects	Get Project Cover Image
+POST	/api/v1/projects/{project_id}/cover-image	upload_project_cover_image_api_v1_projects__project_id__cover_image_post	projects	Upload Project Cover Image
+POST	/api/v1/projects/{project_id}/create-template	create_template_from_project_api_v1_projects__project_id__create_template_post	projects	Create Template From Project
+GET	/api/v1/projects/{project_id}/export	export_project_api_v1_projects__project_id__export_get	projects	Export Project
+GET	/api/v1/projects/{project_id}/file-progress	get_project_file_progress_api_v1_projects__project_id__file_progress_get	projects	Get Project File Progress
+GET	/api/v1/projects/{project_id}/queue	list_project_queue_api_v1_projects__project_id__queue_get	projects	List Project Queue
+POST	/api/v1/projects/{project_id}/remove-archives	remove_archives_from_project_api_v1_projects__project_id__remove_archives_post	projects	Remove Archives From Project
+GET	/api/v1/projects/{project_id}/timeline	get_project_timeline_api_v1_projects__project_id__timeline_get	projects	Get Project Timeline
+GET	/api/v1/queue/	list_queue_api_v1_queue__get	queue	List Queue
+POST	/api/v1/queue/	add_to_queue_api_v1_queue__post	queue	Add To Queue
+GET	/api/v1/queue/batches	list_batches_api_v1_queue_batches_get	queue	List Batches
+POST	/api/v1/queue/batches	create_batch_api_v1_queue_batches_post	queue	Create Batch
+DELETE	/api/v1/queue/batches/{batch_id}	cancel_batch_api_v1_queue_batches__batch_id__delete	queue	Cancel Batch
+GET	/api/v1/queue/batches/{batch_id}	get_batch_api_v1_queue_batches__batch_id__get	queue	Get Batch
+PATCH	/api/v1/queue/batches/{batch_id}	update_batch_api_v1_queue_batches__batch_id__patch	queue	Update Batch
+POST	/api/v1/queue/batches/{batch_id}/dispatch	dispatch_batch_api_v1_queue_batches__batch_id__dispatch_post	queue	Dispatch Batch
+POST	/api/v1/queue/batches/{batch_id}/ungroup	ungroup_batch_api_v1_queue_batches__batch_id__ungroup_post	queue	Ungroup Batch
+PATCH	/api/v1/queue/bulk	bulk_update_queue_items_api_v1_queue_bulk_patch	queue	Bulk Update Queue Items
+POST	/api/v1/queue/printer/{printer_id}/resume	resume_queue_after_failure_api_v1_queue_printer__printer_id__resume_post	queue	Resume Queue After Failure
+POST	/api/v1/queue/reorder	reorder_queue_api_v1_queue_reorder_post	queue	Reorder Queue
+DELETE	/api/v1/queue/{item_id}	delete_queue_item_api_v1_queue__item_id__delete	queue	Delete Queue Item
+GET	/api/v1/queue/{item_id}	get_queue_item_api_v1_queue__item_id__get	queue	Get Queue Item
+PATCH	/api/v1/queue/{item_id}	update_queue_item_api_v1_queue__item_id__patch	queue	Update Queue Item
+POST	/api/v1/queue/{item_id}/cancel	cancel_queue_item_api_v1_queue__item_id__cancel_post	queue	Cancel Queue Item
+POST	/api/v1/queue/{item_id}/start	start_queue_item_api_v1_queue__item_id__start_post	queue	Start Queue Item
+POST	/api/v1/queue/{item_id}/stop	stop_queue_item_api_v1_queue__item_id__stop_post	queue	Stop Queue Item
+GET	/api/v1/scheduled-dryings	list_scheduled_dryings_api_v1_scheduled_dryings_get	scheduled-dryings	List Scheduled Dryings
+POST	/api/v1/scheduled-dryings	create_scheduled_drying_api_v1_scheduled_dryings_post	scheduled-dryings	Create Scheduled Drying
+DELETE	/api/v1/scheduled-dryings/{scheduled_drying_id}	cancel_scheduled_drying_api_v1_scheduled_dryings__scheduled_drying_id__delete	scheduled-dryings	Cancel Scheduled Drying
+GET	/api/v1/settings	get_settings_api_v1_settings_get	settings	Get Settings
+PATCH	/api/v1/settings	patch_settings_api_v1_settings_patch	settings	Patch Settings
+GET	/api/v1/settings/	get_settings_api_v1_settings__get	settings	Get Settings
+PATCH	/api/v1/settings/	patch_settings_api_v1_settings__patch	settings	Patch Settings
+PUT	/api/v1/settings/	update_settings_api_v1_settings__put	settings	Update Settings
+GET	/api/v1/settings/backup	create_backup_api_v1_settings_backup_get	settings	Create Backup
+GET	/api/v1/settings/check-ffmpeg	check_ffmpeg_api_v1_settings_check_ffmpeg_get	settings	Check Ffmpeg
+GET	/api/v1/settings/default-sidebar-order	get_default_sidebar_order_api_v1_settings_default_sidebar_order_get	settings	Get Default Sidebar Order
+POST	/api/v1/settings/electricity-price	update_electricity_price_api_v1_settings_electricity_price_post	settings	Update Electricity Price
+GET	/api/v1/settings/mqtt/status	get_mqtt_status_api_v1_settings_mqtt_status_get	settings	Get Mqtt Status
+GET	/api/v1/settings/network-interfaces	get_network_interfaces_api_v1_settings_network_interfaces_get	settings	Get Network Interfaces
+POST	/api/v1/settings/reset	reset_settings_api_v1_settings_reset_post	settings	Reset Settings
+POST	/api/v1/settings/restore	restore_backup_api_v1_settings_restore_post	settings	Restore Backup
+GET	/api/v1/settings/spoolman	get_spoolman_settings_api_v1_settings_spoolman_get	settings	Get Spoolman Settings
+PUT	/api/v1/settings/spoolman	update_spoolman_settings_api_v1_settings_spoolman_put	settings	Update Spoolman Settings
+GET	/api/v1/settings/ui-flags	get_ui_flags_api_v1_settings_ui_flags_get	settings	Get Ui Flags
+GET	/api/v1/settings/ui-preferences	get_ui_preferences_api_v1_settings_ui_preferences_get	settings	Get Ui Preferences
+GET	/api/v1/settings/virtual-printer	get_virtual_printer_settings_api_v1_settings_virtual_printer_get	settings	Get Virtual Printer Settings
+PUT	/api/v1/settings/virtual-printer	update_virtual_printer_settings_api_v1_settings_virtual_printer_put	settings	Update Virtual Printer Settings
+GET	/api/v1/settings/virtual-printer/models	get_virtual_printer_models_api_v1_settings_virtual_printer_models_get	settings	Get Virtual Printer Models
+GET	/api/v1/slice-jobs/{job_id}	get_slice_job_api_v1_slice_jobs__job_id__get	slice-jobs	Get Slice Job
+GET	/api/v1/slicer-pipelines/	list_pipelines_api_v1_slicer_pipelines__get	Slicer Pipelines	List Pipelines
+POST	/api/v1/slicer-pipelines/	create_pipeline_api_v1_slicer_pipelines__post	Slicer Pipelines	Create Pipeline
+DELETE	/api/v1/slicer-pipelines/{pipeline_id}	delete_pipeline_api_v1_slicer_pipelines__pipeline_id__delete	Slicer Pipelines	Delete Pipeline
+GET	/api/v1/slicer-pipelines/{pipeline_id}	get_pipeline_api_v1_slicer_pipelines__pipeline_id__get	Slicer Pipelines	Get Pipeline
+PUT	/api/v1/slicer-pipelines/{pipeline_id}	update_pipeline_api_v1_slicer_pipelines__pipeline_id__put	Slicer Pipelines	Update Pipeline
+POST	/api/v1/slicer-pipelines/{pipeline_id}/check-eligibility	check_eligibility_api_v1_slicer_pipelines__pipeline_id__check_eligibility_post	Slicer Pipelines	Check Eligibility
+POST	/api/v1/slicer-pipelines/{pipeline_id}/run	run_pipeline_api_v1_slicer_pipelines__pipeline_id__run_post	Slicer Pipelines	Run Pipeline
+GET	/api/v1/slicer-pipelines/{pipeline_id}/runs	list_runs_for_pipeline_api_v1_slicer_pipelines__pipeline_id__runs_get	Slicer Pipelines	List Runs For Pipeline
+GET	/api/v1/slicer/preset-values	get_preset_values_api_v1_slicer_preset_values_get	Slicer Presets	Get Preset Values
+GET	/api/v1/slicer/presets	list_unified_presets_api_v1_slicer_presets_get	Slicer Presets	List Unified Presets
+GET	/api/v1/slicer/preview-progress/{request_id}	get_preview_slice_progress_api_v1_slicer_preview_progress__request_id__get	Slicer Presets	Get Preview Slice Progress
+GET	/api/v1/slicer/printer-models	list_printer_models_api_v1_slicer_printer_models_get	Slicer Presets	List Printer Models
+GET	/api/v1/smart-plugs/	list_smart_plugs_api_v1_smart_plugs__get	smart-plugs	List Smart Plugs
+POST	/api/v1/smart-plugs/	create_smart_plug_api_v1_smart_plugs__post	smart-plugs	Create Smart Plug
+GET	/api/v1/smart-plugs/by-printer/{printer_id}	get_smart_plug_by_printer_api_v1_smart_plugs_by_printer__printer_id__get	smart-plugs	Get Smart Plug By Printer
+GET	/api/v1/smart-plugs/by-printer/{printer_id}/scripts	get_script_plugs_by_printer_api_v1_smart_plugs_by_printer__printer_id__scripts_get	smart-plugs	Get Script Plugs By Printer
+GET	/api/v1/smart-plugs/discover/devices	get_discovered_tasmota_devices_api_v1_smart_plugs_discover_devices_get	smart-plugs	Get Discovered Tasmota Devices
+POST	/api/v1/smart-plugs/discover/scan	start_tasmota_scan_api_v1_smart_plugs_discover_scan_post	smart-plugs	Start Tasmota Scan
+GET	/api/v1/smart-plugs/discover/status	get_tasmota_scan_status_api_v1_smart_plugs_discover_status_get	smart-plugs	Get Tasmota Scan Status
+POST	/api/v1/smart-plugs/discover/stop	stop_tasmota_scan_api_v1_smart_plugs_discover_stop_post	smart-plugs	Stop Tasmota Scan
+GET	/api/v1/smart-plugs/ha/entities	list_ha_entities_api_v1_smart_plugs_ha_entities_get	smart-plugs	List Ha Entities
+GET	/api/v1/smart-plugs/ha/sensors	list_ha_sensor_entities_api_v1_smart_plugs_ha_sensors_get	smart-plugs	List Ha Sensor Entities
+POST	/api/v1/smart-plugs/ha/test-connection	test_ha_connection_api_v1_smart_plugs_ha_test_connection_post	smart-plugs	Test Ha Connection
+POST	/api/v1/smart-plugs/rest/test-connection	test_rest_connection_api_v1_smart_plugs_rest_test_connection_post	smart-plugs	Test Rest Connection
+POST	/api/v1/smart-plugs/test-connection	test_connection_api_v1_smart_plugs_test_connection_post	smart-plugs	Test Connection
+DELETE	/api/v1/smart-plugs/{plug_id}	delete_smart_plug_api_v1_smart_plugs__plug_id__delete	smart-plugs	Delete Smart Plug
+GET	/api/v1/smart-plugs/{plug_id}	get_smart_plug_api_v1_smart_plugs__plug_id__get	smart-plugs	Get Smart Plug
+PATCH	/api/v1/smart-plugs/{plug_id}	update_smart_plug_api_v1_smart_plugs__plug_id__patch	smart-plugs	Update Smart Plug
+POST	/api/v1/smart-plugs/{plug_id}/control	control_smart_plug_api_v1_smart_plugs__plug_id__control_post	smart-plugs	Control Smart Plug
+GET	/api/v1/smart-plugs/{plug_id}/status	get_plug_status_api_v1_smart_plugs__plug_id__status_get	smart-plugs	Get Plug Status
+GET	/api/v1/sponsor-prompt/check	check_sponsor_prompt_api_v1_sponsor_prompt_check_get	sponsor-prompt	Check Sponsor Prompt
+POST	/api/v1/sponsor-prompt/dismiss	dismiss_sponsor_prompt_api_v1_sponsor_prompt_dismiss_post	sponsor-prompt	Dismiss Sponsor Prompt
+GET	/api/v1/spoolbuddy/devices	list_devices_api_v1_spoolbuddy_devices_get	spoolbuddy	List Devices
+POST	/api/v1/spoolbuddy/devices/register	register_device_api_v1_spoolbuddy_devices_register_post	spoolbuddy	Register Device
+DELETE	/api/v1/spoolbuddy/devices/{device_id}	unregister_device_api_v1_spoolbuddy_devices__device_id__delete	spoolbuddy	Unregister Device
+GET	/api/v1/spoolbuddy/devices/{device_id}/calibration	get_calibration_api_v1_spoolbuddy_devices__device_id__calibration_get	spoolbuddy	Get Calibration
+POST	/api/v1/spoolbuddy/devices/{device_id}/calibration/set-factor	set_calibration_factor_api_v1_spoolbuddy_devices__device_id__calibration_set_factor_post	spoolbuddy	Set Calibration Factor
+POST	/api/v1/spoolbuddy/devices/{device_id}/calibration/set-tare	set_tare_offset_api_v1_spoolbuddy_devices__device_id__calibration_set_tare_post	spoolbuddy	Set Tare Offset
+POST	/api/v1/spoolbuddy/devices/{device_id}/calibration/tare	tare_scale_api_v1_spoolbuddy_devices__device_id__calibration_tare_post	spoolbuddy	Tare Scale
+POST	/api/v1/spoolbuddy/devices/{device_id}/cancel-write	cancel_write_api_v1_spoolbuddy_devices__device_id__cancel_write_post	spoolbuddy	Cancel Write
+GET	/api/v1/spoolbuddy/devices/{device_id}/display	get_display_settings_api_v1_spoolbuddy_devices__device_id__display_get	spoolbuddy	Get Display Settings
+PUT	/api/v1/spoolbuddy/devices/{device_id}/display	update_display_settings_api_v1_spoolbuddy_devices__device_id__display_put	spoolbuddy	Update Display Settings
+POST	/api/v1/spoolbuddy/devices/{device_id}/heartbeat	device_heartbeat_api_v1_spoolbuddy_devices__device_id__heartbeat_post	spoolbuddy	Device Heartbeat
+POST	/api/v1/spoolbuddy/devices/{device_id}/system/command	queue_system_command_api_v1_spoolbuddy_devices__device_id__system_command_post	spoolbuddy	Queue System Command
+POST	/api/v1/spoolbuddy/devices/{device_id}/system/command-result	system_command_result_api_v1_spoolbuddy_devices__device_id__system_command_result_post	spoolbuddy	System Command Result
+POST	/api/v1/spoolbuddy/devices/{device_id}/system/config	queue_system_config_update_api_v1_spoolbuddy_devices__device_id__system_config_post	spoolbuddy	Queue System Config Update
+POST	/api/v1/spoolbuddy/devices/{device_id}/update	trigger_daemon_update_api_v1_spoolbuddy_devices__device_id__update_post	spoolbuddy	Trigger Daemon Update
+GET	/api/v1/spoolbuddy/devices/{device_id}/update-check	check_daemon_update_api_v1_spoolbuddy_devices__device_id__update_check_get	spoolbuddy	Check Daemon Update
+POST	/api/v1/spoolbuddy/devices/{device_id}/update-status	report_update_status_api_v1_spoolbuddy_devices__device_id__update_status_post	spoolbuddy	Report Update Status
+GET	/api/v1/spoolbuddy/diagnostics/{device_id}/result	get_diagnostic_result_api_v1_spoolbuddy_diagnostics__device_id__result_get	spoolbuddy	Get Diagnostic Result
+POST	/api/v1/spoolbuddy/diagnostics/{device_id}/result	report_diagnostic_result_api_v1_spoolbuddy_diagnostics__device_id__result_post	spoolbuddy	Report Diagnostic Result
+POST	/api/v1/spoolbuddy/diagnostics/{device_id}/run	queue_diagnostic_api_v1_spoolbuddy_diagnostics__device_id__run_post	spoolbuddy	Queue Diagnostic
+POST	/api/v1/spoolbuddy/nfc/tag-removed	nfc_tag_removed_api_v1_spoolbuddy_nfc_tag_removed_post	spoolbuddy	Nfc Tag Removed
+POST	/api/v1/spoolbuddy/nfc/tag-scanned	nfc_tag_scanned_api_v1_spoolbuddy_nfc_tag_scanned_post	spoolbuddy	Nfc Tag Scanned
+POST	/api/v1/spoolbuddy/nfc/write-result	nfc_write_result_api_v1_spoolbuddy_nfc_write_result_post	spoolbuddy	Nfc Write Result
+POST	/api/v1/spoolbuddy/nfc/write-tag	nfc_write_tag_api_v1_spoolbuddy_nfc_write_tag_post	spoolbuddy	Nfc Write Tag
+POST	/api/v1/spoolbuddy/scale/reading	scale_reading_api_v1_spoolbuddy_scale_reading_post	spoolbuddy	Scale Reading
+POST	/api/v1/spoolbuddy/scale/update-spool-weight	update_spool_weight_api_v1_spoolbuddy_scale_update_spool_weight_post	spoolbuddy	Update Spool Weight
+GET	/api/v1/spoolbuddy/ssh/public-key	get_ssh_public_key_api_v1_spoolbuddy_ssh_public_key_get	spoolbuddy	Get Ssh Public Key
+POST	/api/v1/spoolman/connect	connect_spoolman_api_v1_spoolman_connect_post	spoolman	Connect Spoolman
+POST	/api/v1/spoolman/disconnect	disconnect_spoolman_api_v1_spoolman_disconnect_post	spoolman	Disconnect Spoolman
+GET	/api/v1/spoolman/filaments	get_filaments_api_v1_spoolman_filaments_get	spoolman	Get Filaments
+GET	/api/v1/spoolman/inventory/filaments	list_spoolman_filaments_api_v1_spoolman_inventory_filaments_get	spoolman-inventory	List Spoolman Filaments
+PATCH	/api/v1/spoolman/inventory/filaments/{filament_id}	patch_spoolman_filament_api_v1_spoolman_inventory_filaments__filament_id__patch	spoolman-inventory	Patch Spoolman Filament
+GET	/api/v1/spoolman/inventory/slot-assignments	get_spoolman_slot_assignment_api_v1_spoolman_inventory_slot_assignments_get	spoolman-inventory	Get Spoolman Slot Assignment
+POST	/api/v1/spoolman/inventory/slot-assignments	assign_spoolman_slot_api_v1_spoolman_inventory_slot_assignments_post	spoolman-inventory	Assign Spoolman Slot
+GET	/api/v1/spoolman/inventory/slot-assignments/all	get_all_spoolman_slot_assignments_api_v1_spoolman_inventory_slot_assignments_all_get	spoolman-inventory	Get All Spoolman Slot Assignments
+DELETE	/api/v1/spoolman/inventory/slot-assignments/{spoolman_spool_id}	unassign_spoolman_slot_api_v1_spoolman_inventory_slot_assignments__spoolman_spool_id__delete	spoolman-inventory	Unassign Spoolman Slot
+GET	/api/v1/spoolman/inventory/spools	list_spools_api_v1_spoolman_inventory_spools_get	spoolman-inventory	List Spools
+POST	/api/v1/spoolman/inventory/spools	create_spool_api_v1_spoolman_inventory_spools_post	spoolman-inventory	Create Spool
+POST	/api/v1/spoolman/inventory/spools/bulk	bulk_create_spools_api_v1_spoolman_inventory_spools_bulk_post	spoolman-inventory	Bulk Create Spools
+POST	/api/v1/spoolman/inventory/spools/bulk-archive	bulk_archive_spools_api_v1_spoolman_inventory_spools_bulk_archive_post	spoolman-inventory	Bulk Archive Spools
+POST	/api/v1/spoolman/inventory/spools/bulk-delete	bulk_delete_spools_api_v1_spoolman_inventory_spools_bulk_delete_post	spoolman-inventory	Bulk Delete Spools
+POST	/api/v1/spoolman/inventory/spools/bulk-restore	bulk_restore_spools_api_v1_spoolman_inventory_spools_bulk_restore_post	spoolman-inventory	Bulk Restore Spools
+POST	/api/v1/spoolman/inventory/spools/bulk-update	bulk_update_spools_api_v1_spoolman_inventory_spools_bulk_update_post	spoolman-inventory	Bulk Update Spools
+POST	/api/v1/spoolman/inventory/spools/reset-consumed-counter-bulk	bulk_reset_spool_consumed_counter_api_v1_spoolman_inventory_spools_reset_consumed_counter_bulk_post	spoolman-inventory	Bulk Reset Spool Consumed Counter
+DELETE	/api/v1/spoolman/inventory/spools/{spool_id}	delete_spool_api_v1_spoolman_inventory_spools__spool_id__delete	spoolman-inventory	Delete Spool
+GET	/api/v1/spoolman/inventory/spools/{spool_id}	get_spool_api_v1_spoolman_inventory_spools__spool_id__get	spoolman-inventory	Get Spool
+PATCH	/api/v1/spoolman/inventory/spools/{spool_id}	update_spool_api_v1_spoolman_inventory_spools__spool_id__patch	spoolman-inventory	Update Spool
+POST	/api/v1/spoolman/inventory/spools/{spool_id}/archive	archive_spool_api_v1_spoolman_inventory_spools__spool_id__archive_post	spoolman-inventory	Archive Spool
+GET	/api/v1/spoolman/inventory/spools/{spool_id}/filament-presets	get_spoolman_filament_presets_api_v1_spoolman_inventory_spools__spool_id__filament_presets_get	spoolman-inventory	Get Spoolman Filament Presets
+PUT	/api/v1/spoolman/inventory/spools/{spool_id}/filament-presets	save_spoolman_filament_presets_api_v1_spoolman_inventory_spools__spool_id__filament_presets_put	spoolman-inventory	Save Spoolman Filament Presets
+GET	/api/v1/spoolman/inventory/spools/{spool_id}/k-profiles	get_spoolman_k_profiles_api_v1_spoolman_inventory_spools__spool_id__k_profiles_get	spoolman-inventory	Get Spoolman K Profiles
+PUT	/api/v1/spoolman/inventory/spools/{spool_id}/k-profiles	save_spoolman_k_profiles_api_v1_spoolman_inventory_spools__spool_id__k_profiles_put	spoolman-inventory	Save Spoolman K Profiles
+POST	/api/v1/spoolman/inventory/spools/{spool_id}/reset-consumed-counter	reset_spool_consumed_counter_api_v1_spoolman_inventory_spools__spool_id__reset_consumed_counter_post	spoolman-inventory	Reset Spool Consumed Counter
+POST	/api/v1/spoolman/inventory/spools/{spool_id}/restore	restore_spool_api_v1_spoolman_inventory_spools__spool_id__restore_post	spoolman-inventory	Restore Spool
+GET	/api/v1/spoolman/inventory/spools/{spool_id}/suppliers	get_spoolman_spool_suppliers_api_v1_spoolman_inventory_spools__spool_id__suppliers_get	spoolman-inventory	Get Spoolman Spool Suppliers
+PUT	/api/v1/spoolman/inventory/spools/{spool_id}/suppliers	save_spoolman_spool_suppliers_api_v1_spoolman_inventory_spools__spool_id__suppliers_put	spoolman-inventory	Save Spoolman Spool Suppliers
+PATCH	/api/v1/spoolman/inventory/spools/{spool_id}/tag	link_tag_to_spoolman_spool_api_v1_spoolman_inventory_spools__spool_id__tag_patch	spoolman-inventory	Link Tag To Spoolman Spool
+PATCH	/api/v1/spoolman/inventory/spools/{spool_id}/weight	sync_spool_weight_api_v1_spoolman_inventory_spools__spool_id__weight_patch	spoolman-inventory	Sync Spool Weight
+POST	/api/v1/spoolman/inventory/sync-ams-weights	sync_spoolman_ams_weights_api_v1_spoolman_inventory_sync_ams_weights_post	spoolman-inventory	Sync Spoolman Ams Weights
+POST	/api/v1/spoolman/labels	render_spoolman_labels_api_v1_spoolman_labels_post	labels	Render Spoolman Labels
+POST	/api/v1/spoolman/labels/preview	preview_spoolman_label_api_v1_spoolman_labels_preview_post	labels	Preview Spoolman Label
+GET	/api/v1/spoolman/spools	get_spools_api_v1_spoolman_spools_get	spoolman	Get Spools
+POST	/api/v1/spoolman/spools/from-slot	create_spool_from_slot_api_v1_spoolman_spools_from_slot_post	spoolman	Create Spool From Slot
+GET	/api/v1/spoolman/spools/linked	get_linked_spools_api_v1_spoolman_spools_linked_get	spoolman	Get Linked Spools
+GET	/api/v1/spoolman/spools/unlinked	get_unlinked_spools_api_v1_spoolman_spools_unlinked_get	spoolman	Get Unlinked Spools
+POST	/api/v1/spoolman/spools/{spool_id}/link	link_spool_api_v1_spoolman_spools__spool_id__link_post	spoolman	Link Spool
+POST	/api/v1/spoolman/spools/{spool_id}/unlink	unlink_spool_api_v1_spoolman_spools__spool_id__unlink_post	spoolman	Unlink Spool
+GET	/api/v1/spoolman/status	get_spoolman_status_api_v1_spoolman_status_get	spoolman	Get Spoolman Status
+POST	/api/v1/spoolman/sync-all	sync_all_printers_api_v1_spoolman_sync_all_post	spoolman	Sync All Printers
+POST	/api/v1/spoolman/sync/{printer_id}	sync_printer_ams_api_v1_spoolman_sync__printer_id__post	spoolman	Sync Printer Ams
+GET	/api/v1/support/bundle	generate_support_bundle_api_v1_support_bundle_get	support	Generate Support Bundle
+GET	/api/v1/support/debug-logging	get_debug_logging_state_api_v1_support_debug_logging_get	support	Get Debug Logging State
+POST	/api/v1/support/debug-logging	toggle_debug_logging_api_v1_support_debug_logging_post	support	Toggle Debug Logging
+DELETE	/api/v1/support/logs	clear_logs_api_v1_support_logs_delete	support	Clear Logs
+GET	/api/v1/support/logs	get_logs_api_v1_support_logs_get	support	Get Logs
+GET	/api/v1/system/appliance	get_appliance_defaults_api_v1_system_appliance_get	system	Get Appliance Defaults
+GET	/api/v1/system/db-pool	get_db_pool_api_v1_system_db_pool_get	system	Get Db Pool
+GET	/api/v1/system/health	get_system_health_api_v1_system_health_get	system	Get System Health
+GET	/api/v1/system/info	get_system_info_api_v1_system_info_get	system	Get System Info
+GET	/api/v1/system/storage-usage	get_storage_usage_api_v1_system_storage_usage_get	system	Get Storage Usage
+POST	/api/v1/updates/apply	apply_update_api_v1_updates_apply_post	updates	Apply Update
+GET	/api/v1/updates/check	check_for_updates_api_v1_updates_check_get	updates	Check For Updates
+GET	/api/v1/updates/status	get_update_status_api_v1_updates_status_get	updates	Get Update Status
+GET	/api/v1/updates/version	get_version_api_v1_updates_version_get	updates	Get Version
+GET	/api/v1/user-notifications/preferences	get_user_email_preferences_api_v1_user_notifications_preferences_get	user-notifications	Get User Email Preferences
+PUT	/api/v1/user-notifications/preferences	update_user_email_preferences_api_v1_user_notifications_preferences_put	user-notifications	Update User Email Preferences
+GET	/api/v1/users	list_users_api_v1_users_get	users	List Users
+POST	/api/v1/users	create_user_api_v1_users_post	users	Create User
+GET	/api/v1/users/	list_users_api_v1_users__get	users	List Users
+POST	/api/v1/users/	create_user_api_v1_users__post	users	Create User
+POST	/api/v1/users/me/change-password	change_own_password_api_v1_users_me_change_password_post	users	Change Own Password
+GET	/api/v1/users/slim	list_users_slim_api_v1_users_slim_get	users	List Users Slim
+DELETE	/api/v1/users/{user_id}	delete_user_api_v1_users__user_id__delete	users	Delete User
+GET	/api/v1/users/{user_id}	get_user_api_v1_users__user_id__get	users	Get User
+PATCH	/api/v1/users/{user_id}	update_user_api_v1_users__user_id__patch	users	Update User
+GET	/api/v1/users/{user_id}/items-count	get_user_items_count_api_v1_users__user_id__items_count_get	users	Get User Items Count
+GET	/api/v1/virtual-printers	list_virtual_printers_api_v1_virtual_printers_get	virtual-printers	List Virtual Printers
+POST	/api/v1/virtual-printers	create_virtual_printer_api_v1_virtual_printers_post	virtual-printers	Create Virtual Printer
+GET	/api/v1/virtual-printers/ca-certificate	get_ca_certificate_api_v1_virtual_printers_ca_certificate_get	virtual-printers	Get Ca Certificate
+GET	/api/v1/virtual-printers/tailscale-status	get_tailscale_status_api_v1_virtual_printers_tailscale_status_get	virtual-printers	Get Tailscale Status
+DELETE	/api/v1/virtual-printers/{vp_id}	delete_virtual_printer_api_v1_virtual_printers__vp_id__delete	virtual-printers	Delete Virtual Printer
+GET	/api/v1/virtual-printers/{vp_id}	get_virtual_printer_api_v1_virtual_printers__vp_id__get	virtual-printers	Get Virtual Printer
+PUT	/api/v1/virtual-printers/{vp_id}	update_virtual_printer_api_v1_virtual_printers__vp_id__put	virtual-printers	Update Virtual Printer
+GET	/api/v1/virtual-printers/{vp_id}/diagnostic	diagnose_virtual_printer_api_v1_virtual_printers__vp_id__diagnostic_get	virtual-printers	Diagnose Virtual Printer
+POST	/api/v1/webhook/printer/{printer_id}/cancel	webhook_cancel_print_api_v1_webhook_printer__printer_id__cancel_post	webhook	Webhook Cancel Print
+POST	/api/v1/webhook/printer/{printer_id}/start	webhook_start_print_api_v1_webhook_printer__printer_id__start_post	webhook	Webhook Start Print
+GET	/api/v1/webhook/printer/{printer_id}/status	webhook_get_printer_status_api_v1_webhook_printer__printer_id__status_get	webhook	Webhook Get Printer Status
+POST	/api/v1/webhook/printer/{printer_id}/stop	webhook_stop_print_api_v1_webhook_printer__printer_id__stop_post	webhook	Webhook Stop Print
+GET	/api/v1/webhook/queue	webhook_get_queue_status_api_v1_webhook_queue_get	webhook	Webhook Get Queue Status
+POST	/api/v1/webhook/queue/add	webhook_add_to_queue_api_v1_webhook_queue_add_post	webhook	Webhook Add To Queue
+GET	/health	health_check_health_get		Health Check
+GET	/manifest.json	serve_manifest_manifest_json_head		Serve Manifest
+HEAD	/manifest.json	serve_manifest_manifest_json_head		Serve Manifest
+GET	/sw-register.js	serve_sw_register_sw_register_js_head		Serve Sw Register
+HEAD	/sw-register.js	serve_sw_register_sw_register_js_head		Serve Sw Register
+GET	/sw.js	serve_service_worker_sw_js_head		Serve Service Worker
+HEAD	/sw.js	serve_service_worker_sw_js_head		Serve Service Worker
+GET	/{full_path}	serve_spa__full_path__get		Serve Spa
