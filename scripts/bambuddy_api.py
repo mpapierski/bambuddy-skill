@@ -11,8 +11,11 @@ import mimetypes
 import os
 from pathlib import Path
 import re
+import stat
 import sys
 import ssl
+import tempfile
+import time
 from urllib.parse import quote, urlencode, urlsplit
 import uuid
 
@@ -25,6 +28,7 @@ SECRET = re.compile(
     re.I,
 )
 WRITE_GETS = {"/api/v1/printers/{printer_id}/camera/stop", "/api/v1/settings/backup"}
+CAMERA_TOKEN_CACHE_TTL = 59 * 60  # The documented stream-token lifetime is 60 minutes.
 
 
 class APIError(Exception):
@@ -354,6 +358,178 @@ def ingest(raw, destination, source):
     return manifest
 
 
+def camera_cache_path(config):
+    """Choose a user-specific temporary location scoped to instance and API key."""
+    getuid = getattr(os, "getuid", None)
+    user = (
+        str(getuid())
+        if callable(getuid)
+        else hashlib.sha256(str(Path.home()).encode()).hexdigest()[:16]
+    )
+    identity = config["base_url"] + "\0" + config["api_key"]
+    name = hashlib.sha256(identity.encode()).hexdigest() + ".json"
+    return Path(tempfile.gettempdir()) / f"bambuddy-camera-tokens-{user}" / name
+
+
+def prepare_camera_cache(directory):
+    directory.mkdir(mode=0o700, parents=True, exist_ok=True)
+    info = directory.lstat()
+    getuid = getattr(os, "getuid", None)
+    if not stat.S_ISDIR(info.st_mode) or (callable(getuid) and info.st_uid != getuid()):
+        raise OSError("Camera token cache is not a private user-owned directory")
+    if callable(getuid):
+        os.chmod(directory, 0o700)
+
+
+def read_camera_token(path, now):
+    try:
+        info = path.lstat()
+        getuid = getattr(os, "getuid", None)
+        if not stat.S_ISREG(info.st_mode) or (
+            callable(getuid) and (info.st_uid != getuid() or info.st_mode & 0o077)
+        ):
+            return None
+        data = json.loads(path.read_text())
+        token, issued, expires = data["token"], data["issued_at"], data["expires_at"]
+        if (
+            isinstance(token, str)
+            and token
+            and isinstance(issued, (int, float))
+            and isinstance(expires, (int, float))
+            and issued <= now < expires <= issued + CAMERA_TOKEN_CACHE_TTL
+        ):
+            return token
+    except (OSError, ValueError, KeyError, TypeError):
+        pass
+    return None
+
+
+def save_camera_token(path, token, issued):
+    fd, temporary = tempfile.mkstemp(prefix=".camera-token-", dir=path.parent)
+    try:
+        with os.fdopen(fd, "w") as stream:
+            json.dump(
+                {
+                    "token": token,
+                    "issued_at": issued,
+                    "expires_at": issued + CAMERA_TOKEN_CACHE_TTL,
+                },
+                stream,
+            )
+        os.replace(temporary, path)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
+
+
+def invalid_cached_camera_token(response, raw):
+    if response["status"] == 401:
+        return True
+    if response["status"] == 403:
+        try:
+            data = json.loads(raw)
+            detail = data.get("detail", "") if isinstance(data, dict) else ""
+            if isinstance(detail, str):
+                detail = detail.lower()
+                return "token" in detail and any(
+                    word in detail for word in ("invalid", "expired", "not valid")
+                )
+        except (ValueError, UnicodeDecodeError):
+            pass
+    return False
+
+
+def camera_snapshot(spec, printer_id, output, base_url, timeout, dry_run, write):
+    """Capture a frame with a private, reusable short-lived camera token."""
+    if printer_id <= 0:
+        raise APIError("Printer ID must be positive")
+    token_operation = select_operation(spec, "create_stream_token")
+    snapshot_operation = select_operation(spec, "camera_snapshot")
+    token_path = request_path(spec, token_operation, [], [])
+    printer = [("printer_id", str(printer_id))]
+    if dry_run:
+        emit(
+            {
+                "operations": [
+                    {"method": token_operation["method"], "path": token_path},
+                    {
+                        "method": snapshot_operation["method"],
+                        "path": request_path(
+                            spec, snapshot_operation, printer, [("token", "********")]
+                        ),
+                    },
+                ],
+                "requires_write": True,
+                "token_policy": "Reuse a valid cached token; create or refresh if needed",
+                "saved_to": str(output),
+            }
+        )
+        return 0
+    if not write:
+        raise APIError(
+            "Creating a camera stream token requires --write; use --dry-run to review"
+        )
+    if output.exists():
+        raise APIError("Output file already exists; choose a new path")
+
+    config = connection(base_url)
+    cache_path = camera_cache_path(config)
+    try:
+        prepare_camera_cache(cache_path.parent)
+    except OSError:
+        cache_path = None
+    cached_token = read_camera_token(cache_path, time.time()) if cache_path else None
+
+    def snapshot(token):
+        path = request_path(spec, snapshot_operation, printer, [("token", token)])
+        return exchange(config, snapshot_operation["method"], path, timeout=timeout)
+
+    if cached_token:
+        response, raw = snapshot(cached_token)
+        if invalid_cached_camera_token(response, raw):
+            cached_token = None
+    if not cached_token:
+        issued = time.time()
+        response, raw = exchange(
+            config, token_operation["method"], token_path, timeout=timeout
+        )
+        if not 200 <= response["status"] < 300:
+            emit({"stage": "create_stream_token", "http_status": response["status"]})
+            return 1
+        try:
+            payload = json.loads(raw)
+            token = payload.get("token") if isinstance(payload, dict) else None
+        except (ValueError, UnicodeDecodeError):
+            token = None
+        if not isinstance(token, str) or not token:
+            raise APIError("Camera token response did not contain a valid token")
+        response, raw = snapshot(token)
+    if not 200 <= response["status"] < 300:
+        emit({"stage": "camera_snapshot", "http_status": response["status"]})
+        return 1
+    if not raw.startswith(b"\xff\xd8\xff"):
+        raise APIError("Camera snapshot response was not a JPEG image")
+    cache_status = "reused" if cached_token else "unavailable"
+    if not cached_token and cache_path:
+        try:
+            save_camera_token(cache_path, token, issued)
+            cache_status = "stored"
+        except OSError:
+            pass
+    fd = os.open(output, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, "wb") as stream:
+        stream.write(raw)
+    emit(
+        {
+            "http_status": response["status"],
+            "saved_to": str(output),
+            "bytes": len(raw),
+            "camera_token_cache": cache_status,
+        }
+    )
+    return 0
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -399,6 +575,17 @@ def main(argv=None):
         "--write", action="store_true", help="Execute an already authorized mutation"
     )
     call.add_argument(
+        "--dry-run", action="store_true", help="Preview without contacting Bambuddy"
+    )
+    camera = sub.add_parser(
+        "camera-snapshot", help="Capture a JPEG using a cached temporary camera token"
+    )
+    camera.add_argument("--printer-id", type=int, required=True)
+    camera.add_argument("--output", type=Path, required=True)
+    camera.add_argument(
+        "--write", action="store_true", help="Allow the temporary token to be created"
+    )
+    camera.add_argument(
         "--dry-run", action="store_true", help="Preview without contacting Bambuddy"
     )
     args = parser.parse_args(argv)
@@ -452,6 +639,16 @@ def main(argv=None):
         emit(with_schemas(spec, select_operation(spec, args.operation)))
     elif args.command == "schema":
         emit(with_schemas(spec, resolve_ref(spec, "#/components/schemas/" + args.name)))
+    elif args.command == "camera-snapshot":
+        return camera_snapshot(
+            spec,
+            args.printer_id,
+            args.output,
+            args.url,
+            args.timeout,
+            args.dry_run,
+            args.write,
+        )
     elif args.command == "call":
         item = select_operation(spec, args.operation)
         path = request_path(spec, item, pairs(args.path), pairs(args.query))

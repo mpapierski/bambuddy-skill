@@ -4,6 +4,7 @@ from contextlib import redirect_stdout
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import io
 import json
+import os
 from pathlib import Path
 import stat
 import ssl
@@ -12,6 +13,7 @@ from tempfile import TemporaryDirectory
 import threading
 import unittest
 from unittest.mock import Mock, patch
+from urllib.parse import parse_qs, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -24,13 +26,24 @@ class BambuddyAPITests(unittest.TestCase):
         cls.manifest = json.loads((api.API_DIR / "manifest.json").read_text())
         cls.spec = json.loads((api.API_DIR / cls.manifest["schema_file"]).read_text())
 
+    def setUp(self):
+        cache = TemporaryDirectory()
+        self.addCleanup(cache.cleanup)
+        self.temporary_root = Path(cache.name)
+        temporary_directory = patch.object(
+            api.tempfile, "gettempdir", return_value=cache.name
+        )
+        temporary_directory.start()
+        self.addCleanup(temporary_directory.stop)
+        self.environment = {
+            "BAMBUDDY_URL": "https://bambuddy.example",
+            "BAMBUDDY_API_KEY": "test-key",
+        }
+
     def cli(self, *args, environment=None):
         output = io.StringIO()
         if environment is None:
-            environment = {
-                "BAMBUDDY_URL": "https://bambuddy.example",
-                "BAMBUDDY_API_KEY": "test-key",
-            }
+            environment = self.environment
         with patch.dict("os.environ", environment, clear=True), redirect_stdout(output):
             code = api.main(list(args))
         return code, json.loads(output.getvalue())
@@ -173,7 +186,8 @@ class BambuddyAPITests(unittest.TestCase):
                     str(output),
                 )
             self.assertEqual(output.read_bytes(), payload)
-            self.assertEqual(stat.S_IMODE(output.stat().st_mode), 0o600)
+            if os.name == "posix":
+                self.assertEqual(stat.S_IMODE(output.stat().st_mode), 0o600)
             with patch.object(api, "exchange") as transport:
                 with self.assertRaisesRegex(api.APIError, "already exists"):
                     self.cli(
@@ -185,6 +199,279 @@ class BambuddyAPITests(unittest.TestCase):
                         str(output),
                     )
                 transport.assert_not_called()
+
+    def test_camera_snapshot_uses_private_token_and_saves_private_jpeg(self):
+        token = "temporary-camera+token/=private"
+        jpeg = b"\xff\xd8\xff\xe0test-image\xff\xd9"
+        with TemporaryDirectory() as folder:
+            output = Path(folder) / "camera.jpg"
+            replies = [
+                ({"status": 200}, json.dumps({"token": token}).encode()),
+                ({"status": 200}, jpeg),
+            ]
+            with patch.object(api, "exchange", side_effect=replies) as transport:
+                code, result = self.cli(
+                    "camera-snapshot",
+                    "--printer-id",
+                    "7",
+                    "--output",
+                    str(output),
+                    "--write",
+                )
+            self.assertEqual(code, 0)
+            self.assertEqual(output.read_bytes(), jpeg)
+            if os.name == "posix":
+                self.assertEqual(stat.S_IMODE(output.stat().st_mode), 0o600)
+            self.assertNotIn(token, json.dumps(result))
+            self.assertNotIn("test-key", json.dumps(result))
+            first, second = transport.call_args_list
+            self.assertEqual(
+                first.args[1:3], ("POST", "/api/v1/printers/camera/stream-token")
+            )
+            self.assertEqual(second.args[1], "GET")
+            url = urlsplit(second.args[2])
+            self.assertEqual(url.path, "/api/v1/printers/7/camera/snapshot")
+            self.assertEqual(parse_qs(url.query), {"token": [token]})
+            self.assertEqual(result["camera_token_cache"], "stored")
+            cached_files = list(self.temporary_root.rglob("*.json"))
+            self.assertEqual(len(cached_files), 1)
+            cached_file = cached_files[0]
+            if os.name == "posix":
+                self.assertEqual(stat.S_IMODE(cached_file.stat().st_mode), 0o600)
+                self.assertEqual(stat.S_IMODE(cached_file.parent.stat().st_mode), 0o700)
+            cached = json.loads(cached_file.read_text())
+            self.assertEqual(cached["token"], token)
+            self.assertEqual(cached["expires_at"] - cached["issued_at"], 59 * 60)
+            second_output = Path(folder) / "camera-again.jpg"
+            with patch.object(
+                api, "exchange", return_value=({"status": 200}, jpeg)
+            ) as transport:
+                _, reused = self.cli(
+                    "camera-snapshot",
+                    "--printer-id",
+                    "7",
+                    "--output",
+                    str(second_output),
+                    "--write",
+                )
+            self.assertEqual(reused["camera_token_cache"], "reused")
+            self.assertEqual(transport.call_count, 1)
+            self.assertEqual(transport.call_args.args[1], "GET")
+            self.assertEqual(
+                parse_qs(urlsplit(transport.call_args.args[2]).query),
+                {"token": [token]},
+            )
+
+    def test_camera_snapshot_dry_run_and_guards_do_not_make_requests(self):
+        with TemporaryDirectory() as folder, patch.object(api, "exchange") as transport:
+            output = Path(folder) / "camera.jpg"
+            args = ("camera-snapshot", "--printer-id", "1", "--output", str(output))
+            _, preview = self.cli(*args, "--dry-run", environment={})
+            self.assertTrue(preview["requires_write"])
+            self.assertFalse(output.exists())
+            with self.assertRaisesRegex(api.APIError, "requires --write"):
+                self.cli(*args)
+            output.write_bytes(b"existing")
+            with self.assertRaisesRegex(api.APIError, "already exists"):
+                self.cli(*args, "--write")
+            self.assertEqual(output.read_bytes(), b"existing")
+            transport.assert_not_called()
+
+    def test_camera_snapshot_fails_closed_without_disclosing_token(self):
+        token = "private-camera-token"
+        cases = [
+            ([({"status": 403}, b'{"detail":"denied"}')], "create_stream_token", 403),
+            (
+                [
+                    ({"status": 200}, json.dumps({"token": token}).encode()),
+                    ({"status": 401}, json.dumps({"detail": token}).encode()),
+                ],
+                "camera_snapshot",
+                401,
+            ),
+        ]
+        with TemporaryDirectory() as folder:
+            output = Path(folder) / "camera.jpg"
+            args = (
+                "camera-snapshot",
+                "--printer-id",
+                "1",
+                "--output",
+                str(output),
+                "--write",
+            )
+            for replies, stage, status in cases:
+                with (
+                    self.subTest(stage=stage),
+                    patch.object(api, "exchange", side_effect=replies) as transport,
+                ):
+                    code, result = self.cli(*args)
+                    self.assertEqual(code, 1)
+                    self.assertEqual(
+                        (result["stage"], result["http_status"]), (stage, status)
+                    )
+                    self.assertNotIn(token, json.dumps(result))
+                    self.assertEqual(transport.call_count, len(replies))
+                    self.assertFalse(output.exists())
+            with patch.object(
+                api,
+                "exchange",
+                side_effect=[
+                    ({"status": 200}, json.dumps({"token": token}).encode()),
+                    ({"status": 200}, b"not a JPEG"),
+                ],
+            ):
+                with self.assertRaisesRegex(api.APIError, "not a JPEG"):
+                    self.cli(*args)
+            self.assertFalse(output.exists())
+
+    def test_camera_token_expiry_and_server_rejection_refresh_once(self):
+        jpeg = b"\xff\xd8\xff\xe0test-image\xff\xd9"
+        with TemporaryDirectory() as folder:
+
+            def run(name, token, now):
+                replies = [
+                    ({"status": 200}, json.dumps({"token": token}).encode()),
+                    ({"status": 200}, jpeg),
+                ]
+                with (
+                    patch.object(api, "exchange", side_effect=replies) as transport,
+                    patch.object(api.time, "time", return_value=now),
+                ):
+                    _, result = self.cli(
+                        "camera-snapshot",
+                        "--printer-id",
+                        "1",
+                        "--output",
+                        str(Path(folder) / name),
+                        "--write",
+                    )
+                self.assertEqual(result["camera_token_cache"], "stored")
+                self.assertEqual(
+                    [x.args[1] for x in transport.call_args_list], ["POST", "GET"]
+                )
+
+            run("first.jpg", "first-token", 1000)
+            run("expired.jpg", "second-token", 1000 + api.CAMERA_TOKEN_CACHE_TTL + 1)
+
+            replies = [
+                ({"status": 401}, b'{"detail":"Valid camera stream token required"}'),
+                ({"status": 200}, b'{"token":"third-token"}'),
+                ({"status": 200}, jpeg),
+            ]
+            with (
+                patch.object(api, "exchange", side_effect=replies) as transport,
+                patch.object(
+                    api.time, "time", return_value=1000 + api.CAMERA_TOKEN_CACHE_TTL + 2
+                ),
+            ):
+                _, result = self.cli(
+                    "camera-snapshot",
+                    "--printer-id",
+                    "1",
+                    "--output",
+                    str(Path(folder) / "refreshed.jpg"),
+                    "--write",
+                )
+            self.assertEqual(result["camera_token_cache"], "stored")
+            calls = transport.call_args_list
+            self.assertEqual([x.args[1] for x in calls], ["GET", "POST", "GET"])
+            self.assertEqual(
+                parse_qs(urlsplit(calls[0].args[2]).query), {"token": ["second-token"]}
+            )
+            self.assertEqual(
+                parse_qs(urlsplit(calls[2].args[2]).query), {"token": ["third-token"]}
+            )
+            self.assertNotIn("third-token", json.dumps(result))
+
+    def test_camera_cache_is_scoped_to_instance_and_key_and_requires_private_mode(self):
+        with patch.dict("os.environ", self.environment, clear=True):
+            config = api.connection()
+            path = api.camera_cache_path(config)
+            different_key = api.camera_cache_path({**config, "api_key": "another-key"})
+            different_server = api.camera_cache_path(
+                {**config, "base_url": "https://other.example"}
+            )
+            self.assertNotEqual(path, different_key)
+            self.assertNotEqual(path, different_server)
+            self.assertNotIn("test-key", str(path))
+            self.assertEqual(path.parent.parent, self.temporary_root)
+            api.prepare_camera_cache(path.parent)
+            api.save_camera_token(path, "secret", 1000)
+            self.assertEqual(api.read_camera_token(path, 1001), "secret")
+            if os.name == "posix":
+                path.chmod(0o644)
+                self.assertIsNone(api.read_camera_token(path, 1001))
+                path.chmod(0o600)
+            path.write_text("not valid JSON")
+            self.assertIsNone(api.read_camera_token(path, 1001))
+
+    def test_camera_temporary_cache_works_when_getuid_is_unavailable(self):
+        with (
+            patch.object(api.os, "getuid", None, create=True),
+            patch.object(api.Path, "home", return_value=self.temporary_root),
+            patch.dict("os.environ", self.environment, clear=True),
+        ):
+            path = api.camera_cache_path(api.connection())
+            self.assertEqual(path.parent.parent, self.temporary_root)
+            api.prepare_camera_cache(path.parent)
+            api.save_camera_token(path, "secret", 1000)
+            self.assertEqual(api.read_camera_token(path, 1001), "secret")
+
+    def test_unrelated_camera_failure_does_not_refresh_cached_token(self):
+        with TemporaryDirectory() as folder:
+            output = Path(folder) / "camera.jpg"
+            with (
+                patch.object(api, "read_camera_token", return_value="cached"),
+                patch.object(
+                    api,
+                    "exchange",
+                    return_value=(
+                        {"status": 403},
+                        b'{"detail":"Camera access forbidden"}',
+                    ),
+                ) as transport,
+            ):
+                code, result = self.cli(
+                    "camera-snapshot",
+                    "--printer-id",
+                    "1",
+                    "--output",
+                    str(output),
+                    "--write",
+                )
+            self.assertEqual((code, result["http_status"]), (1, 403))
+            self.assertEqual(transport.call_count, 1)
+            self.assertEqual(transport.call_args.args[1], "GET")
+            self.assertFalse(output.exists())
+
+    def test_snapshot_still_succeeds_if_private_cache_is_unavailable(self):
+        jpeg = b"\xff\xd8\xff\xe0test-image\xff\xd9"
+        with TemporaryDirectory() as folder:
+            output = Path(folder) / "camera.jpg"
+            with (
+                patch.object(api, "prepare_camera_cache", side_effect=PermissionError),
+                patch.object(
+                    api,
+                    "exchange",
+                    side_effect=[
+                        ({"status": 200}, b'{"token":"private"}'),
+                        ({"status": 200}, jpeg),
+                    ],
+                ),
+            ):
+                code, result = self.cli(
+                    "camera-snapshot",
+                    "--printer-id",
+                    "1",
+                    "--output",
+                    str(output),
+                    "--write",
+                )
+            self.assertEqual(code, 0)
+            self.assertEqual(result["camera_token_cache"], "unavailable")
+            self.assertEqual(output.read_bytes(), jpeg)
+            self.assertNotIn("private", json.dumps(result))
 
     def test_errors_are_nonzero_and_do_not_print_unstructured_responses(self):
         for status, raw in [

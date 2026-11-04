@@ -16,11 +16,11 @@ scripts/bambuddy-api call list_printers
 `BAMBUDDY_URL` is the instance's base URL, optionally including its deployment
 path prefix. `--url URL` before the subcommand can override that same input.
 `BAMBUDDY_API_KEY` is sent as `X-API-Key`; the client requires it for live calls
-and does not print it. No connection file or extra credential is used. Offline
-lookup and dry-runs need neither value.
+and does not print it. No connection file or extra user-supplied credential is
+needed. Offline lookup and dry-runs need neither value.
 
 The client connects directly, verifies HTTPS certificates with the system trust
-store, refuses redirects, and never retries. All client code executes locally;
+store and refuses redirects. Ordinary calls do not retry. All client code executes locally;
 request bodies carry API data and file bytes. A sign-in redirect, 401/403, or HTML
 login page is an access failure, not an API result. Report failures against the
 supplied URL instead of adding another transport or authentication mechanism.
@@ -38,6 +38,35 @@ This client handles finite
 responses: use camera snapshots/status rather than a continuous video stream.
 Long slicing is asynchronous; poll the job instead of increasing a slice POST
 timeout indefinitely.
+
+## Camera snapshots
+
+Discover the printer ID, then capture a current frame:
+
+```sh
+scripts/bambuddy-api camera-snapshot --printer-id 1 \
+  --output /absolute/path/printer.jpg --dry-run
+scripts/bambuddy-api camera-snapshot --printer-id 1 \
+  --output /absolute/path/printer.jpg --write
+```
+
+The command stores a short-lived camera stream token in the system temporary
+directory selected by Python's `tempfile.gettempdir()`, in a user-scoped folder
+and scoped to the Bambuddy instance and API key. This is typically `/tmp` on
+Linux and a per-user temporary directory on macOS and Windows; the environment
+can change the location. On POSIX systems the folder has mode 0700 and token files
+have mode 0600. Windows uses the temporary directory's access controls. The token
+is stored unencrypted but is never printed or passed as a command argument.
+
+The client reuses a token for at most 59 minutes (the documented lifetime is 60)
+and checks it with the snapshot request. If the cached token is rejected as
+invalid, it creates a replacement and retries the snapshot once. Other failures
+are reported without a retry. `--write` allows the token-creation POST; it does
+not start a print. The JPEG is saved with private permissions on POSIX and
+existing files are not overwritten. The OS may clear temporary files, but cleanup
+timing isn't guaranteed; if the cache disappears, the client creates a new token.
+If the cache is unavailable, the snapshot can still succeed and the response reports
+`camera_token_cache: unavailable`.
 
 ## Offline discovery
 

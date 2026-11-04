@@ -1,6 +1,6 @@
 ---
 name: bambuddy
-description: Inspect and manage Bambuddy through its REST API, including printers, file uploads, STL/3MF slicing, print queues, filament inventory and settings. Use for Bambuddy workflows and troubleshooting; CAD modeling and desktop Bambu Studio control are separate.
+description: Inspect and manage Bambuddy through its REST API, including printers, camera snapshots, slicing, print queues, filament inventory and settings. Use for Bambuddy workflows and troubleshooting; CAD modeling and desktop Bambu Studio control are separate.
 ---
 
 # Bambuddy
@@ -54,13 +54,19 @@ printer's identity and current status before an action. Inspect request
 schemas before writes, especially replacement PUTs. The client requires
 `--write` for mutations and provides `--dry-run` without network access. This
 flag executes already authorized work; the skill itself grants no authority.
-There are no automatic retries. After an uncertain write, inspect the affected
-file, job or queue item before resubmitting.
+Ordinary calls have no automatic retries. After an uncertain write, inspect the
+affected file, job or queue item before resubmitting.
 
 For library uploads, model links, preset selection, slicing and starting a
 print, read [the print workflow](references/printing.md). Queue insertion can
 dispatch automatically unless `manual_start` is set. Creating this skill or
 testing API access does not authorize a physical print.
+
+For a current camera image, use the client's `camera-snapshot` command documented
+in [CLI usage](references/usage.md). It reuses a short-lived camera token stored
+in the system temporary directory and refreshes it once when expired or rejected.
+Minting that token requires `--write`; no extra user-supplied credential or
+alternate transport is needed.
 
 The API can return printer access codes, serial numbers and authentication
 material. JSON output and previews mask credential fields; boolean availability
