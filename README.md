@@ -1,6 +1,6 @@
 # Bambuddy skill for AI agents
 
-A skill for AI agents to inspect and manage a Bambuddy instance through its REST API. It covers printer status, library files, STL/3MF uploads and slicing, and print queues.
+A skill for AI agents to inspect and manage a Bambuddy instance through its REST API. It covers printer status, camera inspections, library files, STL/3MF uploads and slicing, and print queues.
 
 ## Install in Codex
 
@@ -18,10 +18,13 @@ Replace the details in brackets with your model, printer, and material:
 - **Prepare a model:** “Use `$bambuddy` to download [Printables URL], upload [STL filename], and slice it for my X1 Carbon with [material]. Tell me the estimated print time and filament use. Don't start printing yet.”
 - **Start a print:** “Use `$bambuddy` to print [STL filename] from [Printables URL] on my X1 Carbon. Use [material] from AMS slot [number] and [layer height] layers. The [plate type] build plate is clear. Slice the model, start the print, and check that it actually starts.”
 - **Check progress:** “Use `$bambuddy` to check my X1 Carbon's current print. What's the progress, current layer, remaining time, and are there any errors?”
+- **Automatically confirm a clear plate:** “Use `$bambuddy` to inspect [printer]'s build plate after the current print finishes. If a fresh camera image clearly shows the entire plate is empty, mark it clear in Bambuddy and allow its queued prints to continue. If anything is on the plate or the view is uncertain, leave it waiting and tell me; ask before moving the bed for a better view.”
 - **Inspect filament:** “Use `$bambuddy` to show what filament is loaded in each AMS slot.”
 - **Check 3MF settings:** “Use `$bambuddy` to slice [3MF file] for my X1 Carbon. Preserve the designer's settings where possible, compare the source and output settings, and tell me what changed. Don't start printing yet.”
 
 A Printables model page can have multiple files. Specify the file you want; the agent must be able to download it before uploading it to Bambuddy. An STL contains geometry rather than slicer settings, so the agent needs suitable printer, process, and material presets.
+
+Marking a plate clear updates Bambuddy's queue state; it does not physically remove a print and can allow the next queued job to start.
 
 For direct CLI use, from the skill directory:
 

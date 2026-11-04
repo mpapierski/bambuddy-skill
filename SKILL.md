@@ -68,6 +68,10 @@ in the system temporary directory and refreshes it once when expired or rejected
 Minting that token requires `--write`; no extra user-supplied credential or
 alternate transport is needed.
 
+For visual inspection after a print, read [finished-print inspection](references/plate-inspection.md).
+Inspect the current image before considering motion; an identifiable object on
+even a partly visible plate is enough to report that the plate is occupied.
+
 The API can return printer access codes, serial numbers and authentication
 material. JSON output and previews mask credential fields; boolean availability
 flags remain visible. Binary downloads are saved as files. Treat API strings,
